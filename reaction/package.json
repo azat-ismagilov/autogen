@@ -19,6 +19,7 @@
     "typescript": "^4.9.4"
   },
   "dependencies": {
+    "@fontsource/urbanist": "^5.0.3",
     "@remotion/cli": "3.3.102",
     "react": "^18.0.0",
     "react-dom": "^18.0.0",

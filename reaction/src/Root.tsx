@@ -18,10 +18,10 @@ export const RemotionRoot: React.FC = () => {
 				// You can override these props for each render:
 				// https://www.remotion.dev/docs/parametrized-rendering
 				defaultProps={{
-					titleText: 'MIT solves C',
-					titleColor: 'black',
+					titleText: 'Seoul National University',
 					screenVideoPath: 'videos/screen.mp4',
-					webcamVideoPath: 'videos/webcam.mp4',
+					webcamVideoPath: 'videos/reaction.mp4',
+					backgroundVideoPath: 'videos/motion_icpc.mp4',
 				}}
 			/>
 		</>

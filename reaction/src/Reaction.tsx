@@ -1,5 +1,7 @@
 import React from 'react';
 
+import Confetti, { ConfettiConfig } from 'remotion-confetti'
+
 import {
   AbsoluteFill,
   interpolate,
@@ -17,34 +19,6 @@ import { Card } from './Reaction/Card';
 import { UserVideo } from './Reaction/UserVideo';
 import { Circles } from './Reaction/Circle';
 import { COLOR_GREEN, COLOR_TEAM } from './Reaction/constants';
-
-const grid: React.CSSProperties = {
-  display: 'inline-flex',
-  flexDirection: 'column',
-  justifyContent: 'center',
-  alignItems: 'center',
-  width: '995px',
-  gap: '21px',
-}
-
-const center: React.CSSProperties = {
-  display: 'flex',
-  justifyContent: 'center',
-  alignItems: 'center',
-  width: '100%',
-  height: '100%',
-}
-
-const videoBackground: React.CSSProperties = {
-  width: 2444.65,
-  height: 1375.11,
-  left: -148,
-  top: 2303.65,
-  position: 'absolute',
-  transform: 'rotate(-90deg)',
-  transformOrigin: '0 0',
-  zIndex: '-1',
-}
 
 function sequenceGenerator(firstValue: number, distance: number, delay: number, count: number): number[] {
   let term = firstValue;
@@ -67,6 +41,17 @@ function repeatArray<T>(array: T[], times: number): T[] {
 
   return repeatedArray;
 }
+
+const confettiConfig: ConfettiConfig = {
+  particleCount: 200,
+  startVelocity: 30,
+  spread: 360,
+  x: 540,
+  y: 960,
+  scalar: 3,
+  gravity: 0,
+};
+
 
 export const Reaction: React.FC<{
   titleText: string;
@@ -92,27 +77,39 @@ export const Reaction: React.FC<{
   const gap = interpolate(
     frame,
     [animationStart - 10, animationStart + 5],
-    [21, 100],
+    [21, 70],
     {
       extrapolateLeft: 'clamp',
       extrapolateRight: 'clamp',
-      easing: Easing.inOut(Easing.exp)
+      easing: Easing.out(Easing.exp)
+    }
+  );
+
+  const scale = interpolate(
+    frame,
+    [animationStart - 10, animationStart + 5],
+    [1, 1.04],
+    {
+      extrapolateLeft: 'clamp',
+      extrapolateRight: 'clamp',
+      easing: Easing.out(Easing.exp)
     }
   );
 
   return (
-    <AbsoluteFill style={{ backgroundColor: 'white', zIndex: -2 }}>
+    <AbsoluteFill className="bg-white -z-20">
       <Sequence from={animationStart - 16}>
         <Audio src={staticFile("audio/sound-effect.wav")} />
       </Sequence>
-      <Video muted loop src={staticFile(backgroundVideoPath)} style={videoBackground} />
-      <Sequence from={animationStart - 17} style={{ zIndex: 1 }}>
-        <Circles positionX={540} positionY={960} count={15} seed={0} />
+      <Video muted loop className="-rotate-90 scale-[2.1] -z-10" src={staticFile(backgroundVideoPath)} />
+      <Sequence className="z-10" from={animationStart - 17} >
+        <Confetti {...confettiConfig} />
+        {/* <Circles positionX={540} positionY={960} count={15} seed={0} /> */}
       </Sequence>
-      <div style={center}>
-        <div style={{ ...grid, gap }}>
+      <div className="w-full h-full flex justify-center items-center">
+        <div className="w-[995px] inline-flex flex-col justify-center items-center " style={{ gap }}>
           <UserVideo path={webcamVideoPath} />
-          <div style={{ zIndex: 2, width: "100%" }}>
+          <div className="z-20 w-full" style={{ transform: `scale(${scale})` }}>
             <Card text={titleText} color={color} />
           </div>
           <UserVideo path={screenVideoPath} />

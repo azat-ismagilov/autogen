@@ -1,3 +1,5 @@
+import "./style.css";
+
 import { Composition } from 'remotion';
 import { Reaction } from './Reaction';
 
@@ -18,7 +20,7 @@ export const RemotionRoot: React.FC = () => {
 				// You can override these props for each render:
 				// https://www.remotion.dev/docs/parametrized-rendering
 				defaultProps={{
-					titleText: 'Seoul National University',
+					titleText: 'Ismagilov Azat University of Bremen Forevers',
 					screenVideoPath: 'videos/screen.mp4',
 					webcamVideoPath: 'videos/reaction.mp4',
 					backgroundVideoPath: 'videos/motion_icpc.mp4',

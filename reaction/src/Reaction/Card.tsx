@@ -1,96 +1,41 @@
-import React from 'react';
-import { BORDER_RADIUS, FONT_COLOR, FONT_FAMILY } from './constants';
+import React, { useEffect, useRef, useState } from 'react';
 import { Img } from 'remotion';
+import useFitText from "use-fit-text";
 import "@fontsource/urbanist/700.css";
-
-const card: React.CSSProperties = {
-  borderRadius: BORDER_RADIUS,
-  width: '100%',
-  paddingTop: 30, 
-  paddingBottom: 30, 
-  paddingLeft: 40, 
-  overflow: 'hidden',
-  justifyContent: 'flex-start',
-  alignItems: 'flex-start',
-  gap: 75,
-  display: 'inline-flex'
-};
-
-const insideAlign: React.CSSProperties = {
-  alignSelf: 'stretch',
-  justifyContent: 'flex-start',
-  alignItems: 'flex-start',
-  gap: 31,
-  display: 'inline-flex',
-}
-
-const title: React.CSSProperties = {
-  fontFamily: FONT_FAMILY,
-  color: FONT_COLOR,
-  fontWeight: '700',
-  fontSize: '63pt',
-  lineHeight: '63pt',
-  textTransform: 'uppercase',
-  width: 460,
-};
-
-const icon: React.CSSProperties = {
-  width: 150,
-  height: 150,
-};
-
-const task: React.CSSProperties = {
-  fontFamily: FONT_FAMILY,
-  color: FONT_COLOR,
-  fontWeight: '700',
-  fontSize: '277px',
-  textTransform: 'uppercase',
-};
-
-const teamText: React.CSSProperties = {
-  flexDirection: 'column',
-  justifyContent: 'flex-start',
-  alignItems: 'flex-start',
-  gap: 16,
-  display: 'inline-flex',
-};
-
-const additionalTeamInfo: React.CSSProperties = {
-  justifyContent: 'flex-start',
-  alignItems: 'flex-start',
-  gap: 17,
-  display: 'inline-flex',
-};
-
-const hashtagStyle: React.CSSProperties = {
-  fontFamily: FONT_FAMILY,
-  color: FONT_COLOR,
-  fontSize: 40,
-  fontWeight: '400',
-};
-
-const subtitleStyle: React.CSSProperties = {
-  ...hashtagStyle,
-  opacity: 0.5,
-};
 
 export const Card: React.FC<{
   text: string;
   color: string;
 }> = ({ text, color }) => {
+  const { fontSize, ref } = useFitText({ maxFontSize: 2000 });
+  const contentRef = useRef<HTMLDivElement>(null);
+  const [height, setHeight] = useState(0);
+
+  useEffect(() => {
+    if (!contentRef?.current?.clientHeight) {
+      return;
+    }
+    setHeight(contentRef?.current?.clientHeight);
+  }, [contentRef?.current?.clientHeight]);
+
   return (
-    <div style={{ ...card, background: color }}>
-      <div style={insideAlign}>
-        <Img src="https://en.snu.ac.kr/webdata/uploads/kor/image/2019/12/index-topbanner-symbol_sm.png" style={icon} />
-        <div style={teamText}>
-          <div style={title}>{text}</div>
-          <div style={additionalTeamInfo}>
-            <div style={hashtagStyle}>#SNU</div>
-            <div style={subtitleStyle}>Cafe Mountain</div>
+    <div className="w-full rounded pl-[40px] pr-[60px] overflow-hidden justify-start items-start gap-[200px] inline-flex" style={{ background: color }}>
+      <div ref={contentRef} className="py-[30px] justify-start items-start gap-[31px] inline-flex">
+        <Img className="h-[150px] w-[150px]" src="https://en.snu.ac.kr/webdata/uploads/kor/image/2019/12/index-topbanner-symbol_sm.png" />
+        <div className="flex-col justify-start items-start inline-flex gap-[16px]">
+          <div className="w-[460px] font-bold text-[63px] leading-[63px] uppercase">{text}</div>
+          <div className="justify-start items-start inline-flex gap-[17px] text-[40px]">
+            <div>#SNU</div>
+            <div className="opacity-50">Cafe Mountain</div>
           </div>
         </div>
       </div>
-        <div style={task}>C</div>
+      <div ref={ref} className="w-auto text-right font-bold uppercase" style={{
+        fontSize,
+        height
+      }}>
+        C
+      </div>
     </div>
   );
 };

@@ -1,0 +1,14 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  font-family: PT Sans;
+  color: white;
+  line-height: normal;
+}
+
+.person-mask {
+  -webkit-mask-image: radial-gradient(ellipse 70% 200% at bottom, black 40%, transparent 50%);
+  mask-image: radial-gradient(ellipse 70% 200% at bottom, black 40%, transparent 50%);
+}

@@ -1,0 +1,25 @@
+{
+    "team": {
+        "title": "Example Example",
+        "subtitle": "example example",
+        "path": "photos/0.png"
+    },
+    "participants": [
+        {
+            "title": "Example Example",
+            "subtitle": "dynamic trailblazer",
+            "path": "photos/1.png"
+        },
+        {
+            "title": "Example Example",
+            "subtitle": "cool person",
+            "path": "photos/2.png"
+        },
+        {
+            "title": "Example Example",
+            "subtitle": "dynamic trailblazer",
+            "path": "photos/3.png"
+        }
+    ],
+    "color": "#95C0D4"
+}

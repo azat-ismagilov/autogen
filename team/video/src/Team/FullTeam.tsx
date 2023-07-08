@@ -52,10 +52,10 @@ export const FullTeam: React.FC<{
                 <Img className="w-full absolute scale-100" src={staticFile(path)} />
             </AbsoluteFill>
             <AbsoluteFill className="flex items-center justify-center" style={{ transform: `scale(${textScaling})` }}>
-                <div className="w-10/12 h-60 absolute top-[570px] drop-shadow-2xl">
+                <div className="w-full h-64 absolute top-[570px] drop-shadow-2xl">
                     <FullSizeText text={name} />
                 </div>
-                <div className="w-10/12 h-40 absolute top-[780px] opacity-75 drop-shadow-2xl" style={{ color: backgroundColor }}>
+                <div className="w-full h-40 absolute top-[780px] opacity-75 drop-shadow-2xl" style={{ color: backgroundColor }}>
                     <FullSizeText text={subtitle} />
                 </div>
             </AbsoluteFill>

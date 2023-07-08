@@ -11,7 +11,7 @@
   "repository": {},
   "license": "UNLICENSED",
   "devDependencies": {
-    "@remotion/eslint-config": "3.3.103",
+    "@remotion/eslint-config": "4.0.0",
     "@types/react": "^18.0.26",
     "@types/web": "^0.0.86",
     "eslint": "^8.30.0",
@@ -20,11 +20,11 @@
   },
   "dependencies": {
     "@fontsource/urbanist": "^5.0.3",
-    "@remotion/cli": "3.3.103",
-    "@remotion/tailwind": "3.3.103",
+    "@remotion/cli": "4.0.0",
+    "@remotion/tailwind": "4.0.0",
     "react": "^18.0.0",
     "react-dom": "^18.0.0",
-    "remotion": "3.3.103",
+    "remotion": "4.0.0",
     "remotion-animated": "^1.0.3",
     "remotion-confetti": "^0.3.0",
     "use-fit-text": "^2.4.0"

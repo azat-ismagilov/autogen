@@ -4,10 +4,10 @@
 // Note: The configuration file does only apply if you render via the CLI !
 
 
-import { Config } from 'remotion';
+import { Config } from '@remotion/cli/config';
 import { enableTailwind } from '@remotion/tailwind';
 
-Config.setImageFormat('jpeg');
+Config.setVideoImageFormat('jpeg');
 Config.setOverwriteOutput(true);
 
 Config.overrideWebpackConfig((currentConfiguration) => {

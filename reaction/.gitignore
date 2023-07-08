@@ -3,5 +3,8 @@ dist
 .DS_Store
 .env
 
+public/audio
+public/videos
+
 # Ignore the output video from Git but not videos you import into src/.
 out

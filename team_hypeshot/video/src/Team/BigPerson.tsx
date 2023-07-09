@@ -21,33 +21,31 @@ export const BigPerson: React.FC<{
     const frame = useCurrentFrame();
     const { durationInFrames } = useVideoConfig();
 
+    const startDistance = 0.7;
+    const finishDistance = 1;
 
-    const textScaling = interpolate(
+    const personDistance = interpolate(
         frame,
         [0, durationInFrames],
-        [1.3, 1],
+        [startDistance, finishDistance],
         {
             extrapolateLeft: "clamp",
             extrapolateRight: "clamp",
-            easing: Easing.out(Easing.quad)
+            easing: Easing.out(Easing.cubic)
         },
     );
+    const personScaling = finishDistance / personDistance;
 
-    const personScaling = interpolate(
-        frame,
-        [0, durationInFrames],
-        [1.2, 1],
-        {
-            extrapolateLeft: "clamp",
-            extrapolateRight: "clamp",
-            easing: Easing.out(Easing.quad)
-        },
-    );
+    const backgroundOffset = 3;
+    const backgroundScaling = (finishDistance + backgroundOffset) / (personDistance + backgroundOffset);
+
+    const textOffset = -0.4;
+    const textScaling = (finishDistance + textOffset) / (personDistance + textOffset);
 
     return (
         <ShowUp durationInFrames={30}>
-            <AbsoluteFill style={{ backgroundColor }} />
-            <AbsoluteFill className="bg-white opacity-30" />
+            <AbsoluteFill className="brightness-150 saturate-[0.55]" style={{ backgroundColor }} />
+            <div className="h-full w-2/3 absolute top-1/4 bg-white opacity-25 blur-3xl rounded-full " style={{ transform: `scale(${backgroundScaling})` }} />
             <AbsoluteFill style={{ transform: `scale(${personScaling})` }}>
                 <Img className="person-mask w-full absolute -top-[1380px] grayscale scale-[0.5]" src={staticFile(path)} />
             </AbsoluteFill>

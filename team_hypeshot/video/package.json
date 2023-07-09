@@ -25,7 +25,6 @@
     "react-dom": "^18.0.0",
     "remotion": "4.0.0",
     "remotion-animated": "^1.0.3",
-    "remotion-confetti": "^0.3.0",
     "use-fit-text": "^2.4.0"
   }
 }

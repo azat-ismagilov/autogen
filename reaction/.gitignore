@@ -1,9 +1,1 @@
-node_modules
-dist
-.DS_Store
-.env
-
 public/private
-
-# Ignore the output video from Git but not videos you import into src/.
-out

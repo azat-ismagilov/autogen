@@ -46,15 +46,15 @@ function repeatArray<T>(array: T[], times: number): T[] {
 const confettiConfig: ConfettiConfig = {
   particleCount: 200,
   startVelocity: 30,
-  spread: 360,
-  x: 540,
-  y: 960,
+  spread: 270,
+  x: 1920/2,
+  y: 1080 - 100,
   scalar: 3,
   gravity: 0,
 };
 
 
-export const Reaction: React.FC<z.infer<typeof configSchema>> = ({
+export const ReactionHorizontal: React.FC<z.infer<typeof configSchema>> = ({
   title,
   subtitle,
   hashtag,
@@ -64,8 +64,6 @@ export const Reaction: React.FC<z.infer<typeof configSchema>> = ({
   success,
   audioPath,
   webcamVideoPath,
-  screenVideoPath,
-  backgroundVideoPath,
 }) => {
   const frame = useCurrentFrame();
   const { durationInFrames } = useVideoConfig();
@@ -82,17 +80,6 @@ export const Reaction: React.FC<z.infer<typeof configSchema>> = ({
     repeatArray([colorTeam, COLOR_GREEN], blinkCount - 1).concat([colorTeam, success ? COLOR_GREEN : COLOR_RED])
   );
 
-  const gap = interpolate(
-    frame,
-    [animationStart - 10, animationStart + 5],
-    [21, success ? 70 : 21],
-    {
-      extrapolateLeft: 'clamp',
-      extrapolateRight: 'clamp',
-      easing: Easing.out(Easing.exp)
-    }
-  );
-
   const scale = interpolate(
     frame,
     [animationStart - 10, animationStart + 5],
@@ -106,22 +93,16 @@ export const Reaction: React.FC<z.infer<typeof configSchema>> = ({
 
   return (
     <AbsoluteFill className="bg-white -z-20">
-
-      <Video muted loop className="-rotate-90 scale-[2.1] -z-10" src={staticFile(backgroundVideoPath)} />
-      {/* Show confetti only if success */}
       {success &&
         <Sequence className="z-10" from={animationStart - 17} >
           <Confetti {...confettiConfig} />
           <Audio src={staticFile(audioPath)} />
           {/* <Circles positionX={540} positionY={960} count={15} seed={0} /> */}
         </Sequence>}
+      <Video className="w-full" src={staticFile(webcamVideoPath)} />
       <div className="w-full h-full flex justify-center items-center">
-        <div className="w-[995px] inline-flex flex-col justify-center items-center " style={{ gap }}>
-          <UserVideo path={webcamVideoPath} />
-          <div className="z-20 w-full" style={{ transform: `scale(${scale})` }}>
-            <Card title={title} subtitle={subtitle} hashtag={hashtag} logoPath={logoPath} task={task} color={color} />
-          </div>
-          <UserVideo path={screenVideoPath} />
+        <div className="w-[995px] z-20 absolute bottom-10" style={{ transform: `scale(${scale})` }}>
+          <Card title={title} subtitle={subtitle} hashtag={hashtag} logoPath={logoPath} task={task} color={color} />
         </div>
       </div>
     </AbsoluteFill >

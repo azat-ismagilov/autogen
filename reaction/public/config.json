@@ -1,0 +1,11 @@
+{
+  "title": "ICPC University",
+  "subtitle": "Cafe drinkers",
+  "hashtag": "#ICP",
+  "logoPath": "icpcbits.svg",
+  "colorTeam": "#1A63D8",
+  "task": "C",
+  "screenVideoPath": "videos/screen.mp4",
+  "webcamVideoPath": "videos/reaction.mp4",
+  "backgroundVideoPath": "videos/motion_icpc.mp4"
+}

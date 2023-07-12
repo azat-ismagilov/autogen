@@ -53,7 +53,7 @@ export const BigPerson: React.FC<{
                 <div className="w-full h-64 absolute top-[570px] drop-shadow-2xl">
                     <FullSizeText text={name} />
                 </div>
-                <div className="w-full h-40 absolute top-[780px] opacity-75 brightness-50 drop-shadow-2xl">
+                <div className="w-full h-40 absolute top-[780px] opacity-[0.9] drop-shadow-2xl" style={{color: backgroundColor}}>
                     <FullSizeText text={subtitle} />
                 </div>
             </AbsoluteFill>

@@ -49,7 +49,7 @@ const confettiConfig: ConfettiConfig = {
   spread: 270,
   x: 1920/2,
   y: 1080 - 100,
-  scalar: 3,
+  scalar: 2,
   gravity: 0,
 };
 
@@ -89,7 +89,7 @@ export const ReactionHorizontal: React.FC<z.infer<typeof configSchema>> = ({
       extrapolateRight: 'clamp',
       easing: Easing.out(Easing.exp)
     }
-  );
+  ) / 1.5;
 
   return (
     <AbsoluteFill className="bg-white -z-20">

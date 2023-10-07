@@ -13,7 +13,7 @@ import {
   Sequence
 } from 'remotion';
 import { z } from 'zod';
-import Confetti, { ConfettiConfig } from 'remotion-confetti';
+import Confetti, { ConfettiConfig } from '@ismagilov/remotion-confetti';
 
 import { Card } from './Reaction/Card';
 import { UserVideo } from './Reaction/UserVideo';

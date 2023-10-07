@@ -147,7 +147,7 @@ for image_path in sorted(find_photos_in_directory("team_pictures")):
     with open('video/public/team.json', "w") as file:
         json.dump(data, file)
 
-    p = subprocess.Popen(["npm", "run", "build"], cwd="video")
+    p = subprocess.Popen(["npm", "run", "build"], cwd="video", shell=True)
     p.wait()
 
     output_directory = Path('rendered_videos')

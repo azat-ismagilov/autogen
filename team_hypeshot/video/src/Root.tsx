@@ -1,4 +1,5 @@
 import "./style.css";
+import "@fontsource/pt-sans";
 import { Composition, staticFile } from 'remotion';
 import { Team } from './Team';
 import { FullPerson } from './Team/FullPerson';

@@ -3,7 +3,8 @@
 @tailwind utilities;
 
 body {
-  font-family: PT Sans;
+  font-family: "PT Sans";
+  letter-spacing: -2%;
   color: white;
   line-height: normal;
 }

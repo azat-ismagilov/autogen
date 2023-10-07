@@ -1,0 +1,4 @@
+carvekit==4.1.0
+IPTCInfo3==2.1.4
+Pillow
+torch==2.0.1

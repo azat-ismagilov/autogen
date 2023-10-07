@@ -20,6 +20,7 @@
   },
   "dependencies": {
     "@fontsource/urbanist": "^5.0.3",
+    "@ismagilov/remotion-confetti": "^0.3.1",
     "@remotion/cli": "4.0.6",
     "@remotion/tailwind": "4.0.6",
     "@remotion/zod-types": "^4.0.6",
@@ -27,7 +28,6 @@
     "react-dom": "^18.0.0",
     "remotion": "4.0.6",
     "remotion-animated": "^1.0.3",
-    "remotion-confetti": "^0.3.0",
     "use-fit-text": "^2.4.0",
     "zod": "^3.21.4"
   }

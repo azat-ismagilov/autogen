@@ -33,19 +33,19 @@ export const Card: React.FC<{
   return (
     <div className="w-full rounded pl-[40px] pr-[60px] overflow-hidden justify-start items-start gap-[200px] inline-flex" style={{ background: color }}>
       <div ref={contentRef} className="py-[30px] justify-start items-start gap-[31px] inline-flex">
-        <Img className="h-[150px] w-[150px]" style={{ alignSelf: 'center' }} src={logoPath} />
+        <Img style={{ alignSelf: 'center', width: "100%", height: "100%", maxWidth: "150px", maxHeight: "150px"}} src={logoPath} />
         <div className="flex-col justify-start items-start inline-flex gap-[16px]">
           <div className="w-[460px] font-bold text-[63px] leading-[63px] uppercase">{title}</div>
           <div className="justify-start items-start inline-flex gap-[17px] text-[40px]">
+            <div>{subtitle}</div>
             <div>{hashtag}</div>
-            <div className="opacity-50">{subtitle}</div>
           </div>
         </div>
       </div>
-      <div ref={ref} className="w-auto flex justify-center items-center " style={{ height }}>
+      <div ref={ref} className="w-auto flex justify-center items-center" style={{ height }}>
         <div>
           <div className="text-center font-bold uppercase text-[140px]"> {task}</div>
-          <div className="justify-start items-start inline-flex gap-[15px] text-[40px]">
+          <div className="justify-start items-start inline-flex gap-[15px] text-[40px]" style={{ opacity: opacity }}>
             <div>{outcome}</div>
             <div>{time}</div>
            </div>

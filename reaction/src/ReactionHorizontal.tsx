@@ -18,7 +18,7 @@ import Confetti, { ConfettiConfig } from '@ismagilov/remotion-confetti';
 import { Card } from './Reaction/Card';
 import { UserVideo } from './Reaction/UserVideo';
 import { Circles } from './Reaction/Circle';
-import { COLOR_GREEN, COLOR_RED } from './Reaction/constants';
+import { COLOR_YELLOW, COLOR_GREEN, COLOR_RED } from './Reaction/constants';
 import { configSchema } from './types';
 
 function sequenceGenerator(firstValue: number, distance: number, delay: number, count: number): number[] {
@@ -55,12 +55,15 @@ const confettiConfig: ConfettiConfig = {
 
 
 export const ReactionHorizontal: React.FC<z.infer<typeof configSchema>> = ({
+  contestHeader,
   title,
   subtitle,
   hashtag,
   logoPath,
   colorTeam,
   task,
+  time,
+  outcome,
   success,
   audioPath,
   webcamVideoPath,
@@ -77,7 +80,7 @@ export const ReactionHorizontal: React.FC<z.infer<typeof configSchema>> = ({
   const color = interpolateColors(
     frame,
     sequenceGenerator(lastBlink - blinkCount * (blinkDuration + distanceBlinks), blinkDuration, distanceBlinks, blinkCount),
-    repeatArray([colorTeam, COLOR_GREEN], blinkCount - 1).concat([colorTeam, success ? COLOR_GREEN : COLOR_RED])
+    repeatArray([COLOR_YELLOW, COLOR_GREEN], blinkCount - 1).concat([COLOR_YELLOW, success ? COLOR_GREEN : COLOR_RED])
   );
 
   const scale = interpolate(
@@ -93,16 +96,20 @@ export const ReactionHorizontal: React.FC<z.infer<typeof configSchema>> = ({
 
   return (
     <AbsoluteFill className="bg-white -z-20">
-      {success &&
-        <Sequence className="z-10" from={animationStart - 17} >
+      {success
+        ? <Sequence className="z-10" from={animationStart - 17} >
           <Confetti {...confettiConfig} />
           <Audio src={staticFile(audioPath)} />
           {/* <Circles positionX={540} positionY={960} count={15} seed={0} /> */}
+        </Sequence>
+        : <Sequence className="z-10" from={animationStart - 17} >
+          <Audio src={staticFile(audioPath)} />
         </Sequence>}
       <Video className="w-full" src={staticFile(webcamVideoPath)} />
       <div className="w-full h-full flex justify-center items-center">
         <div className="w-[995px] z-20 absolute bottom-10" style={{ transform: `scale(${scale})` }}>
-          <Card title={title} subtitle={subtitle} hashtag={hashtag} logoPath={logoPath} task={task} color={color} />
+          <Card title={title} subtitle={subtitle} hashtag={hashtag} logoPath={logoPath} task={task} color={color}
+          time ={time} outcome={outcome} success={success} />
         </div>
       </div>
     </AbsoluteFill >

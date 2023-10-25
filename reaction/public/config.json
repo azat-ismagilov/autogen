@@ -1,11 +1,14 @@
 {
+  "contestHeader": "svg/header_46.svg",
   "title": "ICPC University",
   "subtitle": "Cafe drinkers",
-  "hashtag": "#ICP",
-  "logoPath": "icpcbits.svg",
+  "hashtag": "#ICPC",
+  "logoPath": "svg/icpc_logo.svg",
   "colorTeam": "#1A63D8",
-  "task": "C",
+  "task": "D",
+  "time": "250:47",
+  "outcome": "AC",
   "screenVideoPath": "videos/screen.mp4",
   "webcamVideoPath": "videos/reaction.mp4",
-  "backgroundVideoPath": "videos/motion_icpc.mp4"
+  "backgroundVideoPath": "videos/yellow_motion.mp4"
 }

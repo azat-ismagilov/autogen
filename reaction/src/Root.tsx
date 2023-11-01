@@ -26,17 +26,20 @@ export const RemotionRoot: React.FC = () => {
 				schema={configSchema}
 				defaultProps={{
 					configPath: 'config.json',
+					contestHeader: 'svg/header_46.svg',
 					title: 'Title',
 					subtitle: 'Subtitle',
 					hashtag: '#hashtag',
-					logoPath: 'icpcbits.svg',
+					logoPath: 'svg/icpc_logo.svg',
 					colorTeam: 'red',
 					task: 'A',
 					success: true,
-					audioPath: 'audio/sound-effect.wav',
+					time: "250:47",
+                    outcome: "AC",
+					audioPath: 'audio/success-sound-effect.wav',
 					screenVideoPath: 'videos/screen.mp4',
 					webcamVideoPath: 'videos/reaction.mp4',
-					backgroundVideoPath: 'videos/motion_icpc.mp4',
+					backgroundVideoPath: 'videos/yellow_motion.mp4',
 				}}
 				calculateMetadata={async ({ props }) => {
 					const data = await fetch(staticFile(props.configPath));
@@ -64,18 +67,21 @@ export const RemotionRoot: React.FC = () => {
 				// https://www.remotion.dev/docs/parametrized-rendering
 				schema={configSchema}
 				defaultProps={{
-					configPath: 'config.json',
+					configPath: 'config47.json',
+					contestHeader: 'svg/header_46.svg',
 					title: 'Title',
 					subtitle: 'Subtitle',
 					hashtag: '#hashtag',
-					logoPath: 'icpcbits.svg',
+					logoPath: 'svg/icpc_logo.svg',
 					colorTeam: 'red',
 					task: 'A',
 					success: true,
-					audioPath: 'audio/sound-effect.wav',
+					time: "250:47",
+                    outcome: "AC",
+					audioPath: 'audio/success-sound-effect.wav',
 					screenVideoPath: 'videos/screen.mp4',
 					webcamVideoPath: 'videos/reaction.mp4',
-					backgroundVideoPath: 'videos/motion_icpc.mp4',
+					backgroundVideoPath: 'videos/yellow_motion.mp4',
 				}}
 				calculateMetadata={async ({ props }) => {
 					const data = await fetch(staticFile(props.configPath));

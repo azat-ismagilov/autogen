@@ -35,7 +35,7 @@ def load_url_and_save(url, id):
 
 if __name__ == "__main__":
     if len(sys.argv) != 3:
-        print("Usage: python build_video.py <url> <id>")
+        print("Usage: python load_data.py <url> <id>")
         sys.exit(1)
 
     url = sys.argv[1]

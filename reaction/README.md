@@ -17,6 +17,13 @@ npm i
 
 You might need to use force for now.
 
+**Load info from submission**
+
+```console 
+python3 -m pip install requests
+python3 load_data.py http://localhost:8080 id
+```
+
 **Start Preview**
 
 ```console

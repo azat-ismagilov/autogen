@@ -25,21 +25,15 @@ export const RemotionRoot: React.FC = () => {
 				// https://www.remotion.dev/docs/parametrized-rendering
 				schema={configSchema}
 				defaultProps={{
-					configPath: 'config.json',
-					contestHeader: 'svg/header_46.svg',
+					configPath: '10779/config.json',
+					contestHeader: 'svg/header_47.svg',
 					title: 'Title',
 					subtitle: 'Subtitle',
 					hashtag: '#hashtag',
 					logoPath: 'svg/icpc_logo.svg',
 					colorTeam: 'red',
-					task: 'A',
-					success: true,
-					time: "250:47",
-                    outcome: "AC",
-					audioPath: 'audio/success-sound-effect.wav',
-					screenVideoPath: 'videos/screen.mp4',
-					webcamVideoPath: 'videos/reaction.mp4',
-					backgroundVideoPath: 'videos/yellow_motion.mp4',
+					webcamVideoPath: "10779/reaction.mp4",
+                    screenVideoPath: "10779/screen.mp4",
 				}}
 				calculateMetadata={async ({ props }) => {
 					const data = await fetch(staticFile(props.configPath));

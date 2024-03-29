@@ -1,33 +1,40 @@
-import sys
-import requests
 import json
-import subprocess
+import sys
+import os
+
+import ffmpeg
+import requests
 
 
 def load_url_and_save(url, id):
     response = requests.get(f"{url}/api/overlay/externalRun/{id}")
     data = response.json()
 
+    screen_path = data["reactionVideos"][1]["url"]
+    webcam_path = data["reactionVideos"][0]["url"]
+
+    os.makedirs("public/" + id)
+    ffmpeg.input(screen_path).output("public/" + id + "/screen.mp4").run()
+    ffmpeg.input(webcam_path).output("public/" + id + "/reaction.mp4").run()
+
+    is_success = data["result"]["verdict"]["isAccepted"]
+
     response = {
         "title": data["team"]["fullName"],
         "subtitle": data["team"]["displayName"],
-        "hashtag": data["team"]["hashTag"],
-        "logoPath": data["team"]["organization"]["logo"]["url"],
+        # "hashtag": data["team"]["hashTag"],
+        # "logoPath": data["team"]["organization"]["logo"]["url"],
         "task": data["problem"]["letter"],
-        "success": data["result"]["verdict"]["isAccepted"],
-        "webcamVideoPath": (
-            data["reactionVideos"][0]["url"]
-            if len(data["reactionVideos"]) > 0
-            else None
-        ),
-        "screenVideoPath": (
-            data["reactionVideos"][1]["url"]
-            if len(data["reactionVideos"]) > 1
-            else None
-        ),
+        "success": is_success,
+        "audioPath": "audio/success-sound-effect.wav" if is_success == "true" else "audio/fail-sound-effect.wav",
+        "outcome": data["result"]["verdict"]["shortName"],
+        "time": data["time"],
+        "webcamVideoPath": id + "/reaction.mp4",
+        "screenVideoPath": id + "/screen.mp4",
+        "backgroundVideoPath": "videos/yellow_motion.mp4"
     }
 
-    with open("public/config.json", "w") as file:
+    with open("public/" + id + "/config.json", "w") as file:
         json.dump(response, file, indent=4)
 
     # subprocess.run(["npm", "run", "build"])

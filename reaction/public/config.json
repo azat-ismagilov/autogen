@@ -1,11 +1,11 @@
 {
-  "title": "ICPC University",
-  "subtitle": "Cafe drinkers",
-  "hashtag": "#ICP",
-  "logoPath": "icpcbits.svg",
-  "colorTeam": "#1A63D8",
-  "task": "C",
-  "screenVideoPath": "videos/screen.mp4",
-  "webcamVideoPath": "private/reaction.mp4",
-  "backgroundVideoPath": "videos/motion_icpc.mp4"
+    "title": "University ITMO",
+    "subtitle": "UNI-FC",
+    "task": "J",
+    "success": false,
+    "outcome": "WA",
+    "audioPath": "audio/success-sound-effect.wav",
+    "webcamVideoPath": "10779/reaction.mp4",
+    "screenVideoPath": "10779/screen.mp4",
+    "backgroundVideoPath": "videos/motion_icpc.mp4"
 }

@@ -1,11 +1,15 @@
 {
-    "title": "University ITMO",
-    "subtitle": "UNI-FC",
-    "task": "J",
-    "success": false,
-    "outcome": "WA",
+    "title": "Nizhny Novgorod State University",
+    "subtitle": "UNN",
+    "hashtag": "#UNN",
+    "logoPath": "https://d.kbats.ru/wf-2021/logo-orgs/1338.jpg",
+    "task": "H",
+    "success": true,
     "audioPath": "audio/success-sound-effect.wav",
-    "webcamVideoPath": "10779/reaction.mp4",
-    "screenVideoPath": "10779/screen.mp4",
-    "backgroundVideoPath": "videos/motion_icpc.mp4"
+    "outcome": "AC",
+    "time": "1:00:06",
+    "webcamVideoPath": "/reaction.mp4",
+    "screenVideoPath": "/screen.mp4",
+    "contestHeader": "svg/header_46.svg",
+    "backgroundVideoPath": "videos/blue_motion.mp4"
 }

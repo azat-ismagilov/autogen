@@ -2,6 +2,8 @@ import React, { useEffect, useRef, useState } from 'react';
 import { Img, staticFile, Sequence, useVideoConfig, interpolate, useCurrentFrame } from 'remotion';
 import useFitText from "use-fit-text";
 import "@fontsource/urbanist/700.css";
+import { Lottie } from "@remotion/lottie";
+import loader from './data.json';
 
 export const Card: React.FC<{
   title: string;
@@ -21,7 +23,7 @@ export const Card: React.FC<{
   const contentRef = useRef<HTMLDivElement>(null);
   const [height, setHeight] = useState(0);
 
-  const opacity = interpolate(frame, [animationStart - 10, animationStart + 5], [0, 1]);
+  const opacityOut = interpolate(frame, [animationStart - 10, animationStart + 5], [1, 0]);
 
   useEffect(() => {
     if (!contentRef?.current?.clientHeight) {
@@ -45,8 +47,10 @@ export const Card: React.FC<{
       <div ref={ref} className="w-auto flex justify-center items-center" style={{ height }}>
         <div>
           <div className="text-center font-bold uppercase text-[140px]"> {task}</div>
-          <div className="justify-start items-start inline-flex gap-[15px] text-[40px]" style={{ opacity: opacity }}>
-            <div>{outcome}</div>
+          <div className="justify-start items-start inline-flex gap-[15px] text-[40px]">
+            <div style={{ width: 50, opacity: opacityOut}}>
+              <Lottie loop animationData={loader} play />
+            </div>
             <div>{time}</div>
            </div>
         </div>

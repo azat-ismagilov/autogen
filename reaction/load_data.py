@@ -15,12 +15,12 @@ def load_url_and_save(url, id):
         "logoPath": data["team"]["organization"]["logo"]["url"],
         "task": data["problem"]["letter"],
         "success": data["result"]["verdict"]["isAccepted"],
-        "webcam_video_path": (
+        "webcamVideoPath": (
             data["reactionVideos"][0]["url"]
             if len(data["reactionVideos"]) > 0
             else None
         ),
-        "screen_video_path": (
+        "screenVideoPath": (
             data["reactionVideos"][1]["url"]
             if len(data["reactionVideos"]) > 1
             else None

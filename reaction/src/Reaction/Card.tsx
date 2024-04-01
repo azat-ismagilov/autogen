@@ -25,7 +25,7 @@ export const Card: React.FC<{
   return (
     <div className="w-full rounded pl-[40px] pr-[60px] overflow-hidden justify-start items-start gap-[200px] inline-flex" style={{ background: color }}>
       <div ref={contentRef} className="py-[30px] justify-start items-start gap-[31px] inline-flex">
-        <Img className="h-[150px] w-[150px]" src={staticFile(logoPath)} />
+        <Img className="h-[150px] w-[150px]" src={logoPath} />
         <div className="flex-col justify-start items-start inline-flex gap-[16px]">
           <div className="w-[460px] font-bold text-[63px] leading-[63px] uppercase">{title}</div>
           <div className="justify-start items-start inline-flex gap-[17px] text-[40px]">

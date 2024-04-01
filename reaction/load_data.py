@@ -1,10 +1,15 @@
 import json
 import os
 import sys
+from pathlib import Path
 
 import ffmpeg
 import requests
 
+REACTION_VIDEO_FILE = "videos/reaction.mp4"
+SCREEN_VIDEO_FILE = "videos/reaction.mp4"
+REACTION_VIDEO_PATH = Path(".") / "public" / REACTION_VIDEO_FILE
+SCREEN_VIDEO_PATH = Path(".") / "public" / SCREEN_VIDEO_FILE
 
 def load_url_and_save(url, id):
     response = requests.get(f"{url}/api/overlay/externalRun/{id}")
@@ -13,13 +18,13 @@ def load_url_and_save(url, id):
     screen_path = data["reactionVideos"][1]["url"]
     webcam_path = data["reactionVideos"][0]["url"]
 
-    if os.path.exists("public/screen.mp4"):
-        os.remove("public/screen.mp4")
-        ffmpeg.input(screen_path).output("public/screen.mp4").run()
+    if os.path.exists(SCREEN_VIDEO_PATH):
+        os.remove(SCREEN_VIDEO_PATH)
+    ffmpeg.input(screen_path).output(str(SCREEN_VIDEO_PATH)).run(quiet=True)
 
-    if os.path.exists("public/reaction.mp4"):
-        os.remove("public/reaction.mp4")
-        ffmpeg.input(webcam_path).output("public/reaction.mp4").run()
+    if os.path.exists(REACTION_VIDEO_PATH):
+        os.remove(REACTION_VIDEO_PATH)
+    ffmpeg.input(webcam_path).output(str(REACTION_VIDEO_PATH)).run(quiet=True)
 
     is_success = data["result"]["verdict"]["isAccepted"]
 
@@ -40,8 +45,8 @@ def load_url_and_save(url, id):
         "audioPath": "audio/success-sound-effect.wav" if is_success else "audio/fail-sound-effect.wav",
         "outcome": data["result"]["verdict"]["shortName"],
         "time": ("%d:%02d:%02d" % (hours, minutes, seconds)),
-        "webcamVideoPath": "/reaction.mp4",
-        "screenVideoPath": "/screen.mp4",
+        "webcamVideoPath": REACTION_VIDEO_FILE,
+        "screenVideoPath": SCREEN_VIDEO_FILE,
         "contestHeader": "svg/header_46.svg",
         "backgroundVideoPath": "videos/blue_motion.mp4"
     }

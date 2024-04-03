@@ -7,7 +7,7 @@ import ffmpeg
 import requests
 
 REACTION_VIDEO_FILE = "videos/reaction.mp4"
-SCREEN_VIDEO_FILE = "videos/reaction.mp4"
+SCREEN_VIDEO_FILE = "videos/screen.mp4"
 REACTION_VIDEO_PATH = Path(".") / "public" / REACTION_VIDEO_FILE
 SCREEN_VIDEO_PATH = Path(".") / "public" / SCREEN_VIDEO_FILE
 

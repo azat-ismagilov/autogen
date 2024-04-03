@@ -5,6 +5,6 @@ export const UserVideo: React.FC<{
 	path: string;
 }> = ({ path }) => {
 	return (
-		<Video className="w-full rounded" src={path} />
+		<Video className="w-full rounded" src={staticFile(path)} />
 	);
 };

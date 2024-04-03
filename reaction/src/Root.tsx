@@ -31,8 +31,8 @@ export const RemotionRoot: React.FC = () => {
 					hashtag: '#hashtag',
 					logoPath: 'svg/icpc_logo.svg',
 					colorTeam: 'red',
-					webcamVideoPath: "reaction.mp4",
-                    screenVideoPath: "screen.mp4",
+					webcamVideoPath: "videos/reaction.mp4",
+                    screenVideoPath: "videos/screen.mp4",
 				}}
 				calculateMetadata={async ({ props }) => {
 					const data = await fetch(staticFile(props.configPath));

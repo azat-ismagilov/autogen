@@ -3,7 +3,7 @@ import React from 'react';
 import {
   AbsoluteFill,
   interpolate,
-  Video,
+  Img,
   useCurrentFrame,
   useVideoConfig,
   interpolateColors,
@@ -17,9 +17,9 @@ import Confetti, { ConfettiConfig } from '@ismagilov/remotion-confetti';
 
 import { Card } from './Reaction/Card';
 import { UserVideo } from './Reaction/UserVideo';
-import { Circles } from './Reaction/Circle';
 import { COLOR_YELLOW, COLOR_GREEN, COLOR_RED } from './Reaction/constants';
 import { configSchema } from './types';
+import { Background } from './Background';
 
 function sequenceGenerator(firstValue: number, distance: number, delay: number, count: number): number[] {
   let term = firstValue;
@@ -60,6 +60,7 @@ export const Reaction: React.FC<z.infer<typeof configSchema>> = ({
   subtitle,
   hashtag,
   logoPath,
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   colorTeam,
   task,
   time,
@@ -71,9 +72,10 @@ export const Reaction: React.FC<z.infer<typeof configSchema>> = ({
   backgroundVideoPath,
 }) => {
   const frame = useCurrentFrame();
-  const { durationInFrames } = useVideoConfig();
+  const { durationInFrames, fps } = useVideoConfig();
 
-  const animationStart = durationInFrames / 2;
+  // Animation starts 30 seconds before the end
+  const animationStart = durationInFrames - 30 * fps;
   const blinkDuration = 2;
   const distanceBlinks = 7;
   const blinkCount = 4;
@@ -108,30 +110,35 @@ export const Reaction: React.FC<z.infer<typeof configSchema>> = ({
   );
 
   return (
-    <AbsoluteFill className="bg-white -z-20">
-
-      <Video muted loop className="-rotate-90 scale-[2.1] -z-10" src={staticFile(backgroundVideoPath)} />
-      {/* Show confetti only if success */}
-      {success
-       ? <Sequence className="z-10" from={animationStart - 17} >
-         <Confetti {...confettiConfig} />
-         <Audio src={staticFile(audioPath)} />
-         {/* <Circles positionX={540} positionY={960} count={15} seed={0} /> */}
-       </Sequence>
-       : <Sequence className="z-10" from={animationStart - 17} >
-         <Audio src={staticFile(audioPath)} />
-       </Sequence>}
-      <div className="w-full h-full flex justify-center items-center">
-        <div className="w-[1000px] inline-flex flex-col justify-center items-center " style={{ gap }}>
-          <img src={staticFile(contestHeader)} />
-          <UserVideo path={webcamVideoPath} />
-          <div className="z-20 w-full" style={{ transform: `scale(${scale})` }}>
-            <Card title={title} subtitle={subtitle} hashtag={hashtag} logoPath={logoPath} task={task} color={color}
-            time ={time} outcome={outcome} success={success} />
+    <div>
+       <AbsoluteFill>
+          <Background backgroundVideoPath={backgroundVideoPath} />
+       </AbsoluteFill>
+       <AbsoluteFill>
+          {/* Show confetti only if success */}
+          {success
+          ? <Sequence className="z-10" from={animationStart - 17} >
+          <Confetti {...confettiConfig} />
+          <Audio src={staticFile(audioPath)} />
+          {/*
+          <Circles positionX={540} positionY={960} count={15} seed={0} />
+          */}
+          </Sequence>
+          : <Sequence className="z-10" from={animationStart - 17} >
+          <Audio src={staticFile(audioPath)} />
+          </Sequence>}
+          <div className="w-full h-full flex justify-center ite ms-center">
+             <div className="w-[1000px] inline-flex flex-col justify-center items-center " style={{ gap }}>
+                <Img src={staticFile(contestHeader)} />
+                <UserVideo path={webcamVideoPath} />
+                <div className="z-20 w-full" style={{ transform: `scale(${scale})` }}>
+                <Card title={title} subtitle={subtitle} hashtag={hashtag} logoPath={logoPath} task={task} color={color}
+                   time={time} outcome={outcome} success={success} animationStart={animationStart} />
+             </div>
+             <UserVideo path={screenVideoPath} />
           </div>
-          <UserVideo path={screenVideoPath} />
-        </div>
-      </div>
-    </AbsoluteFill >
+    </div>
+    </AbsoluteFill>
+    </div>
   );
 };

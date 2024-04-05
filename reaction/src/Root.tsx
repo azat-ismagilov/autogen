@@ -1,6 +1,6 @@
 import "./style.css";
 
-import { Composition, Video, staticFile } from "remotion";
+import { Composition, staticFile } from "remotion";
 import { getVideoMetadata } from "@remotion/media-utils";
 
 import { Reaction } from './Reaction';
@@ -32,7 +32,14 @@ export const RemotionRoot: React.FC = () => {
 					logoPath: 'svg/icpc_logo.svg',
 					colorTeam: 'red',
 					webcamVideoPath: "videos/reaction.mp4",
-                    screenVideoPath: "videos/screen.mp4",
+					screenVideoPath: "videos/screen.mp4",
+					task: 'Task',
+					time: 10,
+					outcome: 'Outcome',
+					success: true,
+					contestHeader: 'Contest Header',
+					audioPath: 'audio/success-sound-effect.wav',
+					backgroundVideoPath: 'videos/background.mp4',
 				}}
 				calculateMetadata={async ({ props }) => {
 					const data = await fetch(staticFile(props.configPath));
@@ -69,7 +76,7 @@ export const RemotionRoot: React.FC = () => {
 					colorTeam: 'red',
 					task: 'A',
 					success: true,
-					time: "250:47",
+					time: 10,
                     outcome: "AC",
 					audioPath: 'audio/success-sound-effect.wav',
 					screenVideoPath: 'videos/screen.mp4',

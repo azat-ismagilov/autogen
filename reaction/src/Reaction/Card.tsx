@@ -1,8 +1,8 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { Img, staticFile, Sequence, useVideoConfig, interpolate, useCurrentFrame } from 'remotion';
-import useFitText from "use-fit-text";
-import "@fontsource/urbanist/700.css";
-import { Lottie } from "@remotion/lottie";
+import { Img, useVideoConfig, interpolate, useCurrentFrame } from 'remotion'
+import { format } from 'date-fns';
+import '@fontsource/urbanist/700.css';
+import { Lottie } from '@remotion/lottie';
 import loader from './data.json';
 
 export const Card: React.FC<{
@@ -11,48 +11,52 @@ export const Card: React.FC<{
   hashtag: string;
   logoPath: string;
   task: string;
-  time: string;
+  time: number;
   outcome: string;
+  success: boolean;
   color: string;
-}> = ({ title, subtitle, hashtag, logoPath, task, time, outcome, success, color }) => {
+  animationStart: number;
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+}> = ({ title, subtitle, hashtag, logoPath, task, time, outcome, success, color, animationStart }) => {
   const frame = useCurrentFrame();
-  const { durationInFrames } = useVideoConfig();
-  const animationStart = durationInFrames / 2;
+  const { fps } = useVideoConfig();
 
-  const { fontSize, ref } = useFitText({ maxFontSize: 2000 });
-  const contentRef = useRef<HTMLDivElement>(null);
-  const [height, setHeight] = useState(0);
+  const titleRef = useRef<HTMLDivElement>(null);
 
   const opacityOut = interpolate(frame, [animationStart - 10, animationStart + 5], [1, 0]);
 
+  const [titleHeight, setTitleHeight] = useState<number>(0);
+
   useEffect(() => {
-    if (!contentRef?.current?.clientHeight) {
-      return;
+    if (titleRef.current) {
+      setTitleHeight(titleRef.current.offsetHeight);
     }
-    setHeight(contentRef?.current?.clientHeight);
-  }, [contentRef?.current?.clientHeight]);
+  }, []);
+
+  const bigLetterSize = Math.max(Math.min(1000, titleHeight * 0.99), 100);
+
+  // This should be time at animationStart
+  const realtime = time + Math.min(frame - animationStart, 0) / fps * 1000;
+
+  const timer = format(realtime, 'HH:mm:ss');
 
   return (
-    <div className="w-full rounded pl-[40px] pr-[60px] overflow-hidden justify-start items-start gap-[200px] inline-flex" style={{ background: color }}>
-      <div ref={contentRef} className="py-[30px] justify-start items-start gap-[31px] inline-flex">
-        <Img style={{ alignSelf: 'center', width: "100%", height: "100%", maxWidth: "150px", maxHeight: "150px"}} src={logoPath} />
-        <div className="flex-col justify-start items-start inline-flex gap-[16px]">
-          <div className="w-[460px] font-bold text-[63px] leading-[63px] uppercase">{title}</div>
-          <div className="justify-start items-start inline-flex gap-[17px] text-[40px]">
-            <div>{subtitle}</div>
-            <div>{hashtag}</div>
-          </div>
+    <div className="w-full rounded pl-[40px] pr-[60px] overflow-hidden gap-[31px] items-stretch flex" style={{ background: color }}>
+      <Img className="self-center w-auto h-auto max-w-[150px] max-h-[150px]" src={logoPath} />
+      <div className="py-8 grow grid grid-cols-[430px_max-content] justify-between gap-y-5">
+        <div className="place-self-stretch">
+        <div ref={titleRef} className="font-bold text-[63px] leading-none uppercase break-words">{title}</div></div>
+        <div className="place-self-center justify-self-center font-bold leading-none uppercase font-mono" style={{ fontSize: bigLetterSize }}>{task}</div>
+        <div className="text-[40px] leading-none break-words">
+          {subtitle} {hashtag}
         </div>
-      </div>
-      <div ref={ref} className="w-auto flex justify-center items-center" style={{ height }}>
-        <div>
-          <div className="text-center font-bold uppercase text-[140px]"> {task}</div>
-          <div className="justify-start items-start inline-flex gap-[15px] text-[40px]">
-            <div style={{ width: 50, opacity: opacityOut}}>
-              <Lottie loop animationData={loader} play />
-            </div>
-            <div>{time}</div>
-           </div>
+        <div className="justify-self-center justify-start items-start inline-flex gap-[15px] text-[40px] font-mono leading-none">
+          <div className="flex flex-col items-end justify-start">
+            <div style={{ opacity: 1 - opacityOut }}>{outcome}</div>
+            <div className="mt-[-45px] h=[40px]" style={{ opacity: opacityOut }}>
+              <Lottie loop animationData={loader} />
+            </div></div>
+          <div>{timer}</div>
         </div>
       </div>
     </div>

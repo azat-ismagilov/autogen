@@ -8,6 +8,8 @@ export const configSchema = z.object({
   hashtag: z.string(),
   logoPath: z.string(),
   colorTeam: z.string(),
+  time: z.number(),
+  outcome: z.string(),
   task: z.string(),
   success: z.boolean(),
   audioPath: z.string(),

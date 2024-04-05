@@ -1,5 +1,5 @@
 import React from 'react';
-import { Video, staticFile } from 'remotion';
+import { Video, staticFile, OffthreadVideo } from 'remotion';
 
 export const UserVideo: React.FC<{
 	path: string;

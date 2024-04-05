@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { Img, staticFile, Sequence, useVideoConfig, interpolate, useCurrentFrame } from 'remotion';
+import { Img, staticFile, Sequence, useVideoConfig, interpolate, useCurrentFrame  } from 'remotion';
 import useFitText from "use-fit-text";
 import "@fontsource/urbanist/700.css";
 import { Lottie } from "@remotion/lottie";

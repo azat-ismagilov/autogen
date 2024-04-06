@@ -1,7 +1,9 @@
 import json
 import os
+import subprocess
 import sys
 from pathlib import Path
+from datetime import datetime, timedelta
 
 import ffmpeg
 import requests
@@ -11,6 +13,20 @@ SCREEN_VIDEO_FILE = "videos/screen.mp4"
 REACTION_VIDEO_PATH = Path(".") / "public" / REACTION_VIDEO_FILE
 SCREEN_VIDEO_PATH = Path(".") / "public" / SCREEN_VIDEO_FILE
 
+
+def convert(input_path, output_path):
+    if os.path.exists(output_path):
+        os.remove(output_path)
+    print(f"Converting {input_path} to {output_path}...")
+    start_time = datetime.now()
+    ffmpeg.input(str(input_path)).output(
+        str(output_path), **{"c:v": "copy", "c:a": "aac"}
+    ).run(quiet=True)
+    end_time = datetime.now()
+    elapsed_time = end_time - start_time
+    print(f"Conversion completed in {elapsed_time.total_seconds()} seconds.")
+
+
 def load_url_and_save(url, id):
     response = requests.get(f"{url}/api/overlay/externalRun/{id}")
     data = response.json()
@@ -18,22 +34,10 @@ def load_url_and_save(url, id):
     screen_path = data["reactionVideos"][1]["url"]
     webcam_path = data["reactionVideos"][0]["url"]
 
-    if os.path.exists(SCREEN_VIDEO_PATH):
-        os.remove(SCREEN_VIDEO_PATH)
-    ffmpeg.input(screen_path).output(str(SCREEN_VIDEO_PATH)).run(quiet=True)
-
-    if os.path.exists(REACTION_VIDEO_PATH):
-        os.remove(REACTION_VIDEO_PATH)
-    ffmpeg.input(webcam_path).output(str(REACTION_VIDEO_PATH)).run(quiet=True)
+    convert(screen_path, SCREEN_VIDEO_PATH)
+    convert(webcam_path, REACTION_VIDEO_PATH)
 
     is_success = data["result"]["verdict"]["isAccepted"]
-
-    millis = int(data["time"])
-    seconds = (millis / 1000) % 60
-    seconds = int(seconds)
-    minutes = (millis / (1000 * 60)) % 60
-    minutes = int(minutes)
-    hours = (millis / (1000 * 60 * 60)) % 24
 
     response = {
         "title": data["team"]["fullName"],
@@ -42,13 +46,17 @@ def load_url_and_save(url, id):
         "logoPath": data["team"]["organization"]["logo"]["url"],
         "task": data["problem"]["letter"],
         "success": is_success,
-        "audioPath": "audio/success-sound-effect.wav" if is_success else "audio/fail-sound-effect.wav",
+        "audioPath": (
+            "audio/success-sound-effect.wav"
+            if is_success
+            else "audio/fail-sound-effect.wav"
+        ),
         "outcome": data["result"]["verdict"]["shortName"],
-        "time": ("%d:%02d:%02d" % (hours, minutes, seconds)),
+        "time": data["time"],
         "webcamVideoPath": REACTION_VIDEO_FILE,
         "screenVideoPath": SCREEN_VIDEO_FILE,
         "contestHeader": "svg/header_46.svg",
-        "backgroundVideoPath": "videos/blue_motion.mp4"
+        "backgroundVideoPath": "videos/blue_motion.mp4",
     }
 
     if os.path.exists("public/config.json"):
@@ -57,7 +65,7 @@ def load_url_and_save(url, id):
     with open("public/config.json", "w") as file:
         json.dump(response, file, indent=4)
 
-    # subprocess.run(["npm", "run", "build"])
+    subprocess.run(["npm", "run", "build"])
 
 
 if __name__ == "__main__":

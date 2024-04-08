@@ -30,10 +30,8 @@ def convert(input_path, output_path):
 def load_url_and_save(url, id):
     response = requests.get(f"{url}/api/overlay/externalRun/{id}")
     data = response.json()
-
     screen_path = data["reactionVideos"][1]["url"]
     webcam_path = data["reactionVideos"][0]["url"]
-
     convert(screen_path, SCREEN_VIDEO_PATH)
     convert(webcam_path, REACTION_VIDEO_PATH)
 
@@ -46,6 +44,8 @@ def load_url_and_save(url, id):
         "logoPath": data["team"]["organization"]["logo"]["url"],
         "task": data["problem"]["letter"],
         "success": is_success,
+        "rankBefore": data["team"]["rankBefore"],
+        "rankAfter": data["team"]["rankAfter"],
         "audioPath": (
             "audio/success-sound-effect.wav"
             if is_success

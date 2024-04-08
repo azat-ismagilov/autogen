@@ -66,6 +66,8 @@ export const Reaction: React.FC<z.infer<typeof configSchema>> = ({
   time,
   outcome,
   success,
+  rankBefore,
+  rankAfter,
   audioPath,
   webcamVideoPath,
   screenVideoPath,
@@ -111,34 +113,34 @@ export const Reaction: React.FC<z.infer<typeof configSchema>> = ({
 
   return (
     <div>
-       <AbsoluteFill>
-          <Background backgroundVideoPath={backgroundVideoPath} />
-       </AbsoluteFill>
-       <AbsoluteFill>
-          {/* Show confetti only if success */}
-          {success
+      <AbsoluteFill>
+        <Background backgroundVideoPath={backgroundVideoPath} />
+      </AbsoluteFill>
+      <AbsoluteFill>
+        {/* Show confetti only if success */}
+        {success
           ? <Sequence className="z-10" from={animationStart - 17} >
-          <Confetti {...confettiConfig} />
-          <Audio src={staticFile(audioPath)} />
-          {/*
+            <Confetti {...confettiConfig} />
+            <Audio src={staticFile(audioPath)} />
+            {/*
           <Circles positionX={540} positionY={960} count={15} seed={0} />
           */}
           </Sequence>
           : <Sequence className="z-10" from={animationStart - 17} >
-          <Audio src={staticFile(audioPath)} />
+            <Audio src={staticFile(audioPath)} />
           </Sequence>}
-          <div className="w-full h-full flex justify-center ite ms-center">
-             <div className="w-[1000px] inline-flex flex-col justify-center items-center " style={{ gap }}>
-                <Img src={staticFile(contestHeader)} />
-                <UserVideo path={webcamVideoPath} />
-                <div className="z-20 w-full" style={{ transform: `scale(${scale})` }}>
-                <Card title={title} subtitle={subtitle} hashtag={hashtag} logoPath={logoPath} task={task} color={color}
-                   time={time} outcome={outcome} success={success} animationStart={animationStart} />
-             </div>
-             <UserVideo path={screenVideoPath} />
+        <div className="w-full h-full flex justify-center ite ms-center">
+          <div className="w-[1000px] inline-flex flex-col justify-center items-center" style={{ gap }}>
+            <Img src={staticFile(contestHeader)} />
+            <UserVideo path={webcamVideoPath} />
+            <div className="z-20 w-full" style={{ transform: `scale(${scale})` }}>
+              <Card title={title} subtitle={subtitle} hashtag={hashtag} logoPath={logoPath} task={task} color={color}
+                time={time} outcome={outcome} success={success} rankBefore={rankBefore} rankAfter={rankAfter} animationStart={animationStart} />
+            </div>
+            <UserVideo path={screenVideoPath} />
           </div>
-    </div>
-    </AbsoluteFill>
+        </div>
+      </AbsoluteFill>
     </div>
   );
 };

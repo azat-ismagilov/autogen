@@ -12,6 +12,8 @@ export const configSchema = z.object({
   outcome: z.string(),
   task: z.string(),
   success: z.boolean(),
+  rankBefore: z.number(),
+  rankAfter: z.number(),
   audioPath: z.string(),
   screenVideoPath: z.string(),
   webcamVideoPath: z.string(),

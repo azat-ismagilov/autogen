@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { Img, useVideoConfig, interpolate, useCurrentFrame, Easing, spring } from 'remotion'
+import { Img, useVideoConfig, interpolate, useCurrentFrame, Easing, staticFile } from 'remotion'
 import { format } from 'date-fns';
 import '@fontsource/urbanist/700.css';
 import { Lottie } from '@remotion/lottie';
@@ -71,10 +71,16 @@ export const Card: React.FC<{
       easing: Easing.inOut(Easing.sin)
     });
 
-  const place = Math.round(interpolate(frame, [animationStart - 20, animationStart], [rankBefore, rankAfter], {
-    extrapolateLeft: 'clamp',
-    extrapolateRight: 'clamp',
-  }));
+  const place = Math.round(
+    success
+      ? interpolate(frame, [animationStart - 20, animationStart], [rankBefore, rankAfter], {
+        extrapolateLeft: 'clamp',
+        extrapolateRight: 'clamp',
+      }) : interpolate(frame, [animationStart - 30, animationStart - 10, animationStart - 4], [rankBefore, 1, rankBefore], {
+        extrapolateLeft: 'clamp',
+        extrapolateRight: 'clamp'
+      })
+  );
 
   return (
     <div>
@@ -84,7 +90,7 @@ export const Card: React.FC<{
         </div>
       </div>
       <div className="w-full rounded pl-[40px] pr-[60px] overflow-hidden gap-[31px] items-stretch flex" style={{ background: color }}>
-        <Img className="self-center w-auto h-auto max-w-[150px] max-h-[150px]" src={logoPath} />
+        <Img className="self-center w-auto h-auto max-w-[150px] max-h-[150px]" src={staticFile(logoPath)} />
         <div className="py-8 grow grid grid-cols-[430px_max-content] justify-between gap-y-5">
           <div className="place-self-stretch">
             <div ref={titleRef} className="font-bold text-[63px] leading-none uppercase break-words">{title}</div>

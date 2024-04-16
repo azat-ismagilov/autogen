@@ -22,7 +22,7 @@ You might need to use force for now.
 ```console 
 python3 -m pip install requests
 python3 -m pip install ffmpeg-python
-python3 load_data.py http://localhost:8080 id
+python3 load_data.py http://localhost:8080 id -u login:password -k  
 ```
 
 **Start Preview**

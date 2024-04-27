@@ -1,7 +1,6 @@
 import { z } from "zod";
 
 export const configSchema = z.object({
-  configPath: z.string(),
   contestHeader: z.string(),
   title: z.string(),
   subtitle: z.string(),

@@ -25,7 +25,6 @@ export const RemotionRoot: React.FC = () => {
 				// https://www.remotion.dev/docs/parametrized-rendering
 				schema={configSchema}
 				defaultProps={{
-					configPath: 'config.json',
 					title: 'Title',
 					subtitle: 'Subtitle',
 					hashtag: '#hashtag',
@@ -40,18 +39,12 @@ export const RemotionRoot: React.FC = () => {
 					contestHeader: 'Contest Header',
 					audioPath: 'audio/success-sound-effect.wav',
 					backgroundVideoPath: 'videos/background.mp4',
+					rankBefore: 10,
+					rankAfter: 1,
 				}}
 				calculateMetadata={async ({ props }) => {
-					const data = await fetch(staticFile(props.configPath));
-					const json = await data.json();
-					const updatedProps = {
-						...props,
-						...json,
-					};
-
 					const metadata = await getVideoMetadata(staticFile(props.webcamVideoPath));
-
-					return { props: updatedProps, durationInFrames: Math.floor(metadata.durationInSeconds * FPS) }
+					return { durationInFrames: Math.floor(metadata.durationInSeconds * FPS) }
 				}}
 			/>
 			<Composition
@@ -67,7 +60,6 @@ export const RemotionRoot: React.FC = () => {
 				// https://www.remotion.dev/docs/parametrized-rendering
 				schema={configSchema}
 				defaultProps={{
-					configPath: 'config47.json',
 					contestHeader: 'svg/header_46.svg',
 					title: 'Title',
 					subtitle: 'Subtitle',
@@ -77,23 +69,17 @@ export const RemotionRoot: React.FC = () => {
 					task: 'A',
 					success: true,
 					time: 10,
-                    outcome: "AC",
+					outcome: "AC",
 					audioPath: 'audio/success-sound-effect.wav',
 					screenVideoPath: 'videos/screen.mp4',
 					webcamVideoPath: 'videos/reaction.mp4',
 					backgroundVideoPath: 'videos/yellow_motion.mp4',
+					rankBefore: 10,
+					rankAfter: 1,
 				}}
 				calculateMetadata={async ({ props }) => {
-					const data = await fetch(staticFile(props.configPath));
-					const json = await data.json();
-					const updatedProps = {
-						...props,
-						...json,
-					};
-
 					const metadata = await getVideoMetadata(staticFile(props.webcamVideoPath));
-
-					return { props: updatedProps, durationInFrames: Math.floor(metadata.durationInSeconds * FPS) }
+					return { durationInFrames: Math.floor(metadata.durationInSeconds * FPS) }
 				}}
 			/>
 		</>

@@ -9,9 +9,5 @@
     "rankAfter": 3,
     "audioPath": "audio/success-sound-effect.wav",
     "outcome": "AC",
-    "time": 272321,
-    "webcamVideoPath": "videos/reaction.mp4",
-    "screenVideoPath": "videos/screen.mp4",
-    "contestHeader": "svg/header_47.svg",
-    "backgroundVideoPath": "videos/green_motion.mp4"
+    "time": 272321
 }

@@ -2,8 +2,9 @@
 	"editor.tabSize": 2,
 	"typescript.tsdk": "node_modules/typescript/lib",
 	"editor.codeActionsOnSave": {
-		"source.organizeImports": false,
-		"source.fixAll": true
+		"source.organizeImports": "never",
+		"source.fixAll": "explicit"
 	},
-	"typescript.enablePromptUseWorkspaceTsdk": true
+	"typescript.enablePromptUseWorkspaceTsdk": true,
+	"prettier.configPath": ".prettierrc"
 }

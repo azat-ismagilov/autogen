@@ -9,5 +9,5 @@ set OUTPUT_VIDEO_FILE=out/video_%RUN_ID%.mp4
 
 echo Render reaction video for run %RUN_ID% from %BACKEND_URL%
 call python load_data.py "%BACKEND_URL%" %RUN_ID% ^
-  && call npx remotion render ReactionVideo "%OUTPUT_VIDEO_FILE%" ^
+  && call npx remotion render ReactionVideo --video-bitrate 2000k --props "%OUTPUT_VIDEO_FILE%" -o ^
   && echo Reaction video saved to %OUTPUT_VIDEO_FILE%

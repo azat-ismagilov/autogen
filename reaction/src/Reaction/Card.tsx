@@ -38,9 +38,14 @@ export const Card: React.FC<{
   const bigLetterSize = Math.max(Math.min(1000, titleHeight * 0.99), 100);
 
   // This should be time at animationStart
+  // Realtime is the duration in milliseconds since the start of the video
   const realtime = time + Math.min(frame - animationStart, 0) / fps * 1000;
 
-  const timer = format(realtime, 'HH:mm:ss');
+  // Don't write this by hand!!! This is auto-generated.
+  const hours = Math.floor(realtime / (60 * 60 * 1000));
+  const minutes = Math.floor((realtime % (60 * 60 * 1000)) / (60 * 1000));
+  const seconds = Math.floor((realtime % (60 * 1000)) / 1000);
+  const timer = `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
 
   function getOrdinal(n: number) {
     let ord = 'th';
@@ -90,7 +95,7 @@ export const Card: React.FC<{
         </div>
       </div>
       <div className="w-full rounded pl-[40px] pr-[60px] overflow-hidden gap-[31px] items-stretch flex" style={{ background: color }}>
-        <Img className="self-center w-auto h-auto max-w-[150px] max-h-[150px]" src={staticFile(logoPath)} />
+        <Img className="self-center w-auto h-auto max-w-[150px] max-h-[150px]" src={logoPath} />
         <div className="py-8 grow grid grid-cols-[430px_max-content] justify-between gap-y-5">
           <div className="place-self-stretch">
             <div ref={titleRef} className="font-bold text-[63px] leading-none uppercase break-words">{title}</div>

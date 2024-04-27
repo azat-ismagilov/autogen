@@ -1,15 +1,17 @@
 {
-    "title": "Indian Institute of Technology - Varanasi",
-    "subtitle": "IITBHU",
-    "hashtag": "#BanarasHinduU",
-    "logoPath": "https://d.kbats.ru/wf-2021/logo-orgs/9406.jpg",
-    "task": "H",
-    "success": false,
-    "audioPath": "audio/fail-sound-effect.wav",
-    "outcome": "RE",
-    "time": "0:28:54",
+    "title": "ICPC University",
+    "subtitle": "Cafe drinkers",
+    "hashtag": "#ICP",
+    "logoPath": "icpcbits.svg",
+    "task": "B",
+    "success": true,
+    "rankBefore": 3,
+    "rankAfter": 3,
+    "audioPath": "audio/success-sound-effect.wav",
+    "outcome": "AC",
+    "time": 272321,
     "webcamVideoPath": "videos/reaction.mp4",
     "screenVideoPath": "videos/screen.mp4",
-    "contestHeader": "svg/header_46.svg",
-    "backgroundVideoPath": "videos/blue_motion.mp4"
+    "contestHeader": "svg/header_47.svg",
+    "backgroundVideoPath": "videos/green_motion.mp4"
 }

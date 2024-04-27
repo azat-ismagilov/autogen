@@ -7,74 +7,57 @@ from datetime import datetime, timedelta
 
 import ffmpeg
 import requests
-import subprocess
+import urllib3
+import shutil
+
 
 REACTION_VIDEO_FILE = "videos/reaction.mp4"
 SCREEN_VIDEO_FILE = "videos/screen.mp4"
-LOGO_FILE = "logo"
 REACTION_VIDEO_PATH = Path(".") / "public" / REACTION_VIDEO_FILE
 SCREEN_VIDEO_PATH = Path(".") / "public" / SCREEN_VIDEO_FILE
-LOGO_PATH = Path(".") / "public" / LOGO_FILE
+
+replace_from = "http://"
+replace_to = "http://live:snore-smooth-wagon-rhyme@"
 
 
-def convert(input_path, output_path, extra_curl_options):
+def convert(input_path, output_path):
     if os.path.exists(output_path):
         os.remove(output_path)
-
     print(f"Converting {input_path} to {output_path}...")
+    r = requests.get(input_path, stream=True, verify=False)
+    if r.status_code == 200:
+        with open('tmp.ts', 'wb') as f:
+            r.raw.decode_content = True
+            shutil.copyfileobj(r.raw, f)
+    else:
+        print(f"Failed to load {input_path}")
+        os.exit(2)
+
     start_time = datetime.now()
-
-    extra_curl_options = " ".join(extra_curl_options)
-    command = f"curl {input_path} {extra_curl_options} | ffmpeg -i - -c:v copy -c:a aac {output_path}"
-
-    process = subprocess.Popen(
-        command, shell=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL
-    )
-    process.wait()
-
+    ffmpeg.input(str('tmp.ts')).output(
+        str(output_path), **{"c:v": "copy", "c:a": "aac"}
+    ).run() # quiet=True
     end_time = datetime.now()
     elapsed_time = end_time - start_time
     print(f"Conversion completed in {elapsed_time.total_seconds()} seconds.")
 
 
-def download(input_path, output_path, extra_curl_options):
-    if os.path.exists(output_path):
-        os.remove(output_path)
-
-    print(f"Downloading {input_path} to {output_path}...")
-    start_time = datetime.now()
-
-    extra_curl_options = " ".join(extra_curl_options)
-    command = f"curl {input_path} {extra_curl_options} -o {output_path}"
-
-    process = subprocess.Popen(
-        command, shell=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL
-    )
-    process.wait()
-
-    end_time = datetime.now()
-    elapsed_time = end_time - start_time
-    print(f"Download completed in {elapsed_time.total_seconds()} seconds.")
-
-
-def load_url_and_save(url, id, extra_curl_options):
+def load_url_and_save(url, id):
     response = requests.get(f"{url}/api/overlay/externalRun/{id}")
     data = response.json()
-    screen_path = data["reactionVideos"][1]["url"]
-    webcam_path = data["reactionVideos"][0]["url"]
-    logo_path = data["team"]["organization"]["logo"]["url"]
-    convert(screen_path, SCREEN_VIDEO_PATH, extra_curl_options)
-    convert(webcam_path, REACTION_VIDEO_PATH, extra_curl_options)
-    download(logo_path, LOGO_PATH, extra_curl_options)
+    screen_path = data["reactionVideos"][1]["url"].replace(replace_from, replace_to)
+    webcam_path = data["reactionVideos"][0]["url"].replace(replace_from, replace_to)
+    convert(screen_path, SCREEN_VIDEO_PATH)
+    convert(webcam_path, REACTION_VIDEO_PATH)
 
     is_success = data["result"]["verdict"]["isAccepted"]
 
     response = {
-        "title": data["team"]["fullName"],
-        "subtitle": data["team"]["displayName"],
+        "title": data["team"]["displayName"],
+        "subtitle": data["team"]["customFields"]["clicsTeamFullName"],
         "hashtag": data["team"]["hashTag"],
         "logoPath": data["team"]["organization"]["logo"]["url"],
-        "task": LOGO_FILE,
+        "task": data["problem"]["letter"],
         "success": is_success,
         "rankBefore": data["team"]["rankBefore"],
         "rankAfter": data["team"]["rankAfter"],
@@ -87,8 +70,14 @@ def load_url_and_save(url, id, extra_curl_options):
         "time": data["time"],
         "webcamVideoPath": REACTION_VIDEO_FILE,
         "screenVideoPath": SCREEN_VIDEO_FILE,
-        "contestHeader": "svg/header_46.svg",
-        "backgroundVideoPath": "videos/blue_motion.mp4",
+        "contestHeader": ("svg/header_46.svg"
+         	if data["team"]["id"].startswith("46")
+		else "svg/header_47.svg"
+	),
+        "backgroundVideoPath": ("videos/blue_motion.mp4"
+         	if data["team"]["id"].startswith("46")
+		else "videos/green_motion.mp4"
+	),
     }
 
     if os.path.exists("public/config.json"):
@@ -97,14 +86,14 @@ def load_url_and_save(url, id, extra_curl_options):
     with open("public/config.json", "w") as file:
         json.dump(response, file, indent=4)
 
-    subprocess.run(["npm", "run", "build"])
+    # subprocess.run(["npm", "run", "build"])
 
 
 if __name__ == "__main__":
-    if len(sys.argv) < 3:
-        print("Usage: python load_data.py <url> <id> [extra_curl_options]")
+    if len(sys.argv) != 3:
+        print("Usage: python load_data.py <url> <id>")
         sys.exit(1)
+
     url = sys.argv[1]
     id = sys.argv[2]
-    extra_curl_options = sys.argv[3:]
-    load_url_and_save(url, id, extra_curl_options)
+    load_url_and_save(url, id)

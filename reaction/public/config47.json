@@ -3,7 +3,7 @@
   "title": "ICPC University",
   "subtitle": "Cafe drinkers",
   "hashtag": "#ICPC",
-  "logoPath": "svg/icpc_logo.svg",
+  "logoPath": "https://icpc.global/static/media/icpc-medium5.5c857487.png",
   "colorTeam": "#1A63D8",
   "task": "A",
   "success": false,

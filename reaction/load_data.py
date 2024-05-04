@@ -9,6 +9,7 @@ import ffmpeg
 import requests
 import shutil
 import argparse
+import multiprocessing
 
 
 def convert(input_path, output_path):
@@ -17,7 +18,7 @@ def convert(input_path, output_path):
     print(f"Converting {input_path} to {output_path}...")
     start_time = datetime.now()
     ffmpeg.input(str(input_path)).output(
-        str(output_path), **{"c:a": "aac", "b:v": "2000k"}
+        str(output_path), threads=1, **{"c:a": "aac", "b:v": "2000k"}
     ).run(quiet=True)
     end_time = datetime.now()
     elapsed_time = end_time - start_time
@@ -100,5 +101,10 @@ if __name__ == "__main__":
     ids = args.id
     override = args.override
 
-    for id in ids:
-        load_url_and_save(url, id, override)
+    if not ids:
+        response = requests.get(f"{url}/api/overlay/runs")
+        ids = [run["id"] for run in response.json() if run["isHidden"] == False]
+
+    with multiprocessing.Pool() as pool:
+        inputs = [(url, id, override) for id in ids]
+        pool.starmap(load_url_and_save, [(url, id, override) for id in ids])

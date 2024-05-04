@@ -2,12 +2,16 @@
     "title": "ICPC University",
     "subtitle": "Cafe drinkers",
     "hashtag": "#ICP",
-    "logoPath": "icpcbits.svg",
+    "logoPath": "https://icpc.global/static/media/icpc-medium5.5c857487.png",
     "task": "B",
     "success": true,
     "rankBefore": 3,
     "rankAfter": 3,
     "audioPath": "audio/success-sound-effect.wav",
     "outcome": "AC",
-    "time": 272321
+    "time": 272321,
+    "webcamVideoPath": "videos/reaction.mp4",
+    "screenVideoPath": "videos/screen.mp4",
+    "contestHeader": "svg/header_47.svg",
+    "backgroundVideoPath": "videos/green_motion.mp4"
 }

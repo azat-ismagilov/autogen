@@ -7,48 +7,42 @@ from datetime import datetime, timedelta
 
 import ffmpeg
 import requests
-import urllib3
 import shutil
-
-
-REACTION_VIDEO_FILE = "videos/reaction.mp4"
-SCREEN_VIDEO_FILE = "videos/screen.mp4"
-REACTION_VIDEO_PATH = Path(".") / "public" / REACTION_VIDEO_FILE
-SCREEN_VIDEO_PATH = Path(".") / "public" / SCREEN_VIDEO_FILE
-
-replace_from = "http://"
-replace_to = "http://live:snore-smooth-wagon-rhyme@"
+import argparse
+import multiprocessing
 
 
 def convert(input_path, output_path):
     if os.path.exists(output_path):
         os.remove(output_path)
     print(f"Converting {input_path} to {output_path}...")
-    r = requests.get(input_path, stream=True, verify=False)
-    if r.status_code == 200:
-        with open('tmp.ts', 'wb') as f:
-            r.raw.decode_content = True
-            shutil.copyfileobj(r.raw, f)
-    else:
-        print(f"Failed to load {input_path}")
-        os.exit(2)
-
     start_time = datetime.now()
-    ffmpeg.input(str('tmp.ts')).output(
-        str(output_path), **{"c:v": "copy", "c:a": "aac"}
-    ).run() # quiet=True
+    ffmpeg.input(str(input_path)).output(
+        str(output_path), threads=1, **{"c:a": "aac", "b:v": "2000k"}
+    ).run(quiet=True)
     end_time = datetime.now()
     elapsed_time = end_time - start_time
     print(f"Conversion completed in {elapsed_time.total_seconds()} seconds.")
 
 
-def load_url_and_save(url, id):
+def load_url_and_save(url, id, override=True):
     response = requests.get(f"{url}/api/overlay/externalRun/{id}")
     data = response.json()
-    screen_path = data["reactionVideos"][1]["url"].replace(replace_from, replace_to)
-    webcam_path = data["reactionVideos"][0]["url"].replace(replace_from, replace_to)
-    convert(screen_path, SCREEN_VIDEO_PATH)
-    convert(webcam_path, REACTION_VIDEO_PATH)
+    config_path = Path(".") / "public" / f"config_{id}.json"
+
+    if config_path.exists() and not override:
+        print(f"Skipping {id} as config file already exists.")
+        return
+
+    screen_path = data["reactionVideos"][1]["url"]
+    webcam_path = data["reactionVideos"][0]["url"]
+
+    reaction_video_file = f"videos/reaction_{id}.mp4"
+    screen_video_file = f"videos/screen_{id}.mp4"
+    reaction_video_path = Path(".") / "public" / reaction_video_file
+    screen_video_path = Path(".") / "public" / screen_video_file
+    convert(screen_path, screen_video_path)
+    convert(webcam_path, reaction_video_path)
 
     is_success = data["result"]["verdict"]["isAccepted"]
 
@@ -68,32 +62,49 @@ def load_url_and_save(url, id):
         ),
         "outcome": data["result"]["verdict"]["shortName"],
         "time": data["time"],
-        "webcamVideoPath": REACTION_VIDEO_FILE,
-        "screenVideoPath": SCREEN_VIDEO_FILE,
-        "contestHeader": ("svg/header_46.svg"
-         	if data["team"]["id"].startswith("46")
-		else "svg/header_47.svg"
-	),
-        "backgroundVideoPath": ("videos/blue_motion.mp4"
-         	if data["team"]["id"].startswith("46")
-		else "videos/green_motion.mp4"
-	),
+        "webcamVideoPath": reaction_video_file,
+        "screenVideoPath": screen_video_file,
+        "contestHeader": (
+            "svg/header_46.svg"
+            if data["team"]["id"].startswith("46")
+            else "svg/header_47.svg"
+        ),
+        "backgroundVideoPath": (
+            "videos/blue_motion.mp4"
+            if data["team"]["id"].startswith("46")
+            else "videos/green_motion.mp4"
+        ),
     }
 
-    if os.path.exists("public/config.json"):
-        os.remove("public/config.json")
-
-    with open("public/config.json", "w") as file:
+    with open(config_path, "w") as file:
         json.dump(response, file, indent=4)
-
-    # subprocess.run(["npm", "run", "build"])
 
 
 if __name__ == "__main__":
-    if len(sys.argv) != 3:
-        print("Usage: python load_data.py <url> <id>")
-        sys.exit(1)
+    parser = argparse.ArgumentParser(description="Load data from URL and save")
+    parser.add_argument("url", help="URL to load data from")
+    parser.add_argument(
+        "id",
+        nargs="*",
+        default=[],
+        help="ID(s) of the submissions. If not specified, will load all submissions.",
+    )
+    parser.add_argument(
+        "-o",
+        "--override",
+        action="store_true",
+        help="Override existing files if they already exist",
+    )
+    args = parser.parse_args()
 
-    url = sys.argv[1]
-    id = sys.argv[2]
-    load_url_and_save(url, id)
+    url = args.url
+    ids = args.id
+    override = args.override
+
+    if not ids:
+        response = requests.get(f"{url}/api/overlay/runs")
+        ids = [run["id"] for run in response.json() if run["isHidden"] == False]
+
+    with multiprocessing.Pool() as pool:
+        inputs = [(url, id, override) for id in ids]
+        pool.starmap(load_url_and_save, [(url, id, override) for id in ids])

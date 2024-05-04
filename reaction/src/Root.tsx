@@ -6,6 +6,7 @@ import { getVideoMetadata } from "@remotion/media-utils";
 import { Reaction } from './Reaction';
 import { ReactionHorizontal } from './ReactionHorizontal';
 import { configSchema } from "./types";
+import React from "react";
 
 const FPS = 30;
 
@@ -25,11 +26,10 @@ export const RemotionRoot: React.FC = () => {
 				// https://www.remotion.dev/docs/parametrized-rendering
 				schema={configSchema}
 				defaultProps={{
-					configPath: 'config.json',
 					title: 'Title',
 					subtitle: 'Subtitle',
 					hashtag: '#hashtag',
-					logoPath: 'svg/icpc_logo.svg',
+					logoPath: 'https://icpc.global/static/media/icpc-medium5.5c857487.png',
 					colorTeam: 'red',
 					webcamVideoPath: "videos/reaction.mp4",
 					screenVideoPath: "videos/screen.mp4",
@@ -37,21 +37,15 @@ export const RemotionRoot: React.FC = () => {
 					time: 10,
 					outcome: 'Outcome',
 					success: true,
-					contestHeader: 'Contest Header',
+					contestHeader: 'svg/header_46.svg',
 					audioPath: 'audio/success-sound-effect.wav',
-					backgroundVideoPath: 'videos/background.mp4',
+					backgroundVideoPath: 'videos/blue_motion.mp4',
+					rankBefore: 10,
+					rankAfter: 1,
 				}}
 				calculateMetadata={async ({ props }) => {
-					const data = await fetch(staticFile(props.configPath));
-					const json = await data.json();
-					const updatedProps = {
-						...props,
-						...json,
-					};
-
 					const metadata = await getVideoMetadata(staticFile(props.webcamVideoPath));
-
-					return { props: updatedProps, durationInFrames: Math.floor(metadata.durationInSeconds * FPS) }
+					return { durationInFrames: Math.floor(metadata.durationInSeconds * FPS) }
 				}}
 			/>
 			<Composition
@@ -66,34 +60,28 @@ export const RemotionRoot: React.FC = () => {
 				// You can override these props for each render:
 				// https://www.remotion.dev/docs/parametrized-rendering
 				schema={configSchema}
+
 				defaultProps={{
-					configPath: 'config47.json',
-					contestHeader: 'svg/header_46.svg',
 					title: 'Title',
 					subtitle: 'Subtitle',
 					hashtag: '#hashtag',
-					logoPath: 'svg/icpc_logo.svg',
+					logoPath: 'https://icpc.global/static/media/icpc-medium5.5c857487.png',
 					colorTeam: 'red',
-					task: 'A',
-					success: true,
+					webcamVideoPath: "videos/reaction.mp4",
+					screenVideoPath: "videos/screen.mp4",
+					task: 'Task',
 					time: 10,
-                    outcome: "AC",
+					outcome: 'Outcome',
+					success: true,
+					contestHeader: 'svg/header_46.svg',
 					audioPath: 'audio/success-sound-effect.wav',
-					screenVideoPath: 'videos/screen.mp4',
-					webcamVideoPath: 'videos/reaction.mp4',
-					backgroundVideoPath: 'videos/yellow_motion.mp4',
+					backgroundVideoPath: 'videos/blue_motion.mp4',
+					rankBefore: 10,
+					rankAfter: 1,
 				}}
 				calculateMetadata={async ({ props }) => {
-					const data = await fetch(staticFile(props.configPath));
-					const json = await data.json();
-					const updatedProps = {
-						...props,
-						...json,
-					};
-
 					const metadata = await getVideoMetadata(staticFile(props.webcamVideoPath));
-
-					return { props: updatedProps, durationInFrames: Math.floor(metadata.durationInSeconds * FPS) }
+					return { durationInFrames: Math.floor(metadata.durationInSeconds * FPS) }
 				}}
 			/>
 		</>

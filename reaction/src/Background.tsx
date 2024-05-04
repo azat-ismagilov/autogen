@@ -1,5 +1,5 @@
+import React, { useEffect, useState } from "react";
 import { getVideoMetadata } from "@remotion/media-utils";
-import { useEffect, useState } from "react";
 import {
     cancelRender,
     continueRender,
@@ -12,8 +12,8 @@ import {
 
 
 export const Background: React.FC<{
-    backgroundVideoPath:string
-  }> = ({ backgroundVideoPath }) => {
+    backgroundVideoPath: string
+}> = ({ backgroundVideoPath }) => {
     const [duration, setDuration] = useState<null | number>(null);
     const [handle] = useState(() => delayRender());
     const { fps } = useVideoConfig();

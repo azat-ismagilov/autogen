@@ -18,7 +18,7 @@ def convert(input_path, output_path):
     print(f"Converting {input_path} to {output_path}...")
     start_time = datetime.now()
     ffmpeg.input(str(input_path)).output(
-        str(output_path), threads=1, **{"c:a": "aac", "b:v": "2000k"}
+        str(output_path), threads=1, **{"c:a": "aac", "b:v": "2000k", "s": "1280x720"}
     ).run(quiet=True)
     end_time = datetime.now()
     elapsed_time = end_time - start_time

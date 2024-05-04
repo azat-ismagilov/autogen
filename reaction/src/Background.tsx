@@ -37,7 +37,7 @@ export const Background: React.FC<{
 
     return (
         <Loop durationInFrames={Math.floor(fps * duration)}>
-            <OffthreadVideo src={src} className="-rotate-90 scale-[3] -z-10" />
+            <OffthreadVideo toneMapped={false} src={src} className="-rotate-90 scale-[3] -z-10" />
         </Loop>
     );
 };

@@ -95,16 +95,24 @@ if __name__ == "__main__":
         action="store_true",
         help="Override existing files if they already exist",
     )
+    parser.add_argument(
+        "-p",
+        "--processes",
+        type=int,
+        default=1,
+        help="Number of processes to use for parallel execution",
+    )
     args = parser.parse_args()
 
     url = args.url
     ids = args.id
     override = args.override
+    processes = args.processes
 
     if not ids:
         response = requests.get(f"{url}/api/overlay/runs")
         ids = [run["id"] for run in response.json() if run["isHidden"] == False]
 
-    with multiprocessing.Pool() as pool:
+    with multiprocessing.Pool(processes=processes) as pool:
         inputs = [(url, id, override) for id in ids]
         pool.starmap(load_url_and_save, [(url, id, override) for id in ids])

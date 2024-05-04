@@ -46,7 +46,7 @@ def load_url_and_save(url, id, file_dir, override=True):
     if file_dir:
         video_dir = Path(file_dir)
         video_dir.mkdir(exist_ok=True)
-        video_server = "http://localhost:9090/{file_dir}"
+        video_server = f"http://localhost:9090/{file_dir}"
     (video_dir / "videos").mkdir(exist_ok=True)
     reaction_video_path = video_dir / reaction_video_file
     screen_video_path = video_dir / screen_video_file

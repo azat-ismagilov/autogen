@@ -1,11 +1,12 @@
 import "./style.css";
 
-import { Composition, staticFile } from "remotion";
+import { Composition } from "remotion";
 import { getVideoMetadata } from "@remotion/media-utils";
 
 import { Reaction } from './Reaction';
 import { ReactionHorizontal } from './ReactionHorizontal';
 import { configSchema } from "./types";
+import { videoSrc } from "./helper";
 import React from "react";
 
 const FPS = 30;
@@ -30,7 +31,6 @@ export const RemotionRoot: React.FC = () => {
 					subtitle: 'Subtitle',
 					hashtag: '#hashtag',
 					logoPath: 'https://icpc.global/static/media/icpc-medium5.5c857487.png',
-					colorTeam: 'red',
 					webcamVideoPath: "videos/reaction.mp4",
 					screenVideoPath: "videos/screen.mp4",
 					task: 'Task',
@@ -44,7 +44,7 @@ export const RemotionRoot: React.FC = () => {
 					rankAfter: 1,
 				}}
 				calculateMetadata={async ({ props }) => {
-					const metadata = await getVideoMetadata(staticFile(props.webcamVideoPath));
+					const metadata = await getVideoMetadata(videoSrc(props.webcamVideoPath, props.videoServer));
 					return { durationInFrames: Math.floor(metadata.durationInSeconds * FPS) }
 				}}
 			/>
@@ -66,7 +66,6 @@ export const RemotionRoot: React.FC = () => {
 					subtitle: 'Subtitle',
 					hashtag: '#hashtag',
 					logoPath: 'https://icpc.global/static/media/icpc-medium5.5c857487.png',
-					colorTeam: 'red',
 					webcamVideoPath: "videos/reaction.mp4",
 					screenVideoPath: "videos/screen.mp4",
 					task: 'Task',
@@ -80,7 +79,7 @@ export const RemotionRoot: React.FC = () => {
 					rankAfter: 1,
 				}}
 				calculateMetadata={async ({ props }) => {
-					const metadata = await getVideoMetadata(staticFile(props.webcamVideoPath));
+					const metadata = await getVideoMetadata(videoSrc(props.webcamVideoPath, props.videoServer));
 					return { durationInFrames: Math.floor(metadata.durationInSeconds * FPS) }
 				}}
 			/>

@@ -1,10 +1,12 @@
 import React from 'react';
-import { staticFile, OffthreadVideo } from 'remotion';
+import { OffthreadVideo } from 'remotion';
+import { videoSrc } from '../helper';
 
 export const UserVideo: React.FC<{
 	path: string;
-}> = ({ path }) => {
+	videoServer?: string;
+}> = ({ path, videoServer }) => {
 	return (
-		<OffthreadVideo toneMapped={false} className="w-full rounded" src={staticFile(path)} />
+		<OffthreadVideo toneMapped={false} className="w-full rounded" src={videoSrc(path, videoServer)} />
 	);
 };

@@ -60,8 +60,6 @@ export const Reaction: React.FC<z.infer<typeof configSchema>> = ({
   subtitle,
   hashtag,
   logoPath,
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  colorTeam,
   task,
   time,
   outcome,
@@ -72,6 +70,7 @@ export const Reaction: React.FC<z.infer<typeof configSchema>> = ({
   webcamVideoPath,
   screenVideoPath,
   backgroundVideoPath,
+  videoServer,
 }) => {
   const frame = useCurrentFrame();
   const { durationInFrames, fps } = useVideoConfig();
@@ -132,12 +131,12 @@ export const Reaction: React.FC<z.infer<typeof configSchema>> = ({
         <div className="w-full h-full flex justify-center ite ms-center">
           <div className="w-[1000px] inline-flex flex-col justify-center items-center" style={{ gap }}>
             <Img src={staticFile(contestHeader)} />
-            <UserVideo path={webcamVideoPath} />
+            <UserVideo path={webcamVideoPath} videoServer={videoServer} />
             <div className="z-20 w-full" style={{ transform: `scale(${scale})` }}>
               <Card title={title} subtitle={subtitle} hashtag={hashtag} logoPath={logoPath} task={task} color={color}
                 time={time} outcome={outcome} success={success} rankBefore={rankBefore} rankAfter={rankAfter} animationStart={animationStart} />
             </div>
-            <UserVideo path={screenVideoPath} />
+            <UserVideo path={screenVideoPath} videoServer={videoServer} />
           </div>
         </div>
       </AbsoluteFill>

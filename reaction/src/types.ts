@@ -6,7 +6,6 @@ export const configSchema = z.object({
   subtitle: z.string(),
   hashtag: z.string(),
   logoPath: z.string(),
-  colorTeam: z.string(),
   time: z.number(),
   outcome: z.string(),
   task: z.string(),
@@ -17,4 +16,5 @@ export const configSchema = z.object({
   screenVideoPath: z.string(),
   webcamVideoPath: z.string(),
   backgroundVideoPath: z.string(),
+  videoServer: z.union([z.string(), z.undefined()]),
 });

@@ -7,10 +7,10 @@ import multiprocessing
 import argparse
 
 
-def render_video(public_directory, filename):
+def render_video(config_directory, filename):
     id = filename.removeprefix("config_").removesuffix(".json")
     print(f"Rendering {id}...")
-    props_path = public_directory / filename
+    props_path = config_directory / filename
     output_path = Path(".") / "out" / f"output_{id}.mp4"
     render_command = [
         "npx",
@@ -22,9 +22,9 @@ def render_video(public_directory, filename):
         "--concurrency=1",
     ]
     subprocess.run(render_command, stdout=subprocess.DEVNULL)
-    processed_directory = public_directory / "processed"
+    processed_directory = config_directory / "processed"
     os.makedirs(processed_directory, exist_ok=True)
-    shutil.move(public_directory / filename, processed_directory / filename)
+    shutil.move(config_directory / filename, processed_directory / filename)
     print(f"Rendered {id}.")
 
 
@@ -40,11 +40,24 @@ if __name__ == "__main__":
     args = parser.parse_args()
     processes = args.processes
 
-    public_directory = Path(".") / "public"
+    print("Serving at http://localhost:9090")
+    server_command = [
+        "npx",
+        "--yes",
+        "serve",
+        "-p",
+        "9090",
+        "--cors",
+        ".",
+    ]
+    subprocess.Popen(server_command)
+    time.sleep(1)
+
+    config_directory = Path(".") / "config"
     while True:
         filenames = [
-            (public_directory, filename)
-            for filename in os.listdir(public_directory)
+            (config_directory, filename)
+            for filename in os.listdir(config_directory)
             if filename.startswith("config_") and filename.endswith(".json")
         ]
         with multiprocessing.Pool(processes=processes) as pool:

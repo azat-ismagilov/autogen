@@ -25,10 +25,12 @@ def convert(input_path, output_path):
     print(f"Conversion completed in {elapsed_time.total_seconds()} seconds.")
 
 
-def load_url_and_save(url, id, override=True):
+def load_url_and_save(url, id, file_dir, override=True):
     response = requests.get(f"{url}/api/overlay/externalRun/{id}")
     data = response.json()
-    config_path = Path(".") / "public" / f"config_{id}.json"
+    config_dir = Path(".") / "config"
+    config_dir.mkdir(exist_ok=True)
+    config_path = config_dir / f"config_{id}.json"
 
     if config_path.exists() and not override:
         print(f"Skipping {id} as config file already exists.")
@@ -39,8 +41,15 @@ def load_url_and_save(url, id, override=True):
 
     reaction_video_file = f"videos/reaction_{id}.mp4"
     screen_video_file = f"videos/screen_{id}.mp4"
-    reaction_video_path = Path(".") / "public" / reaction_video_file
-    screen_video_path = Path(".") / "public" / screen_video_file
+    video_dir = Path(".") / "public"
+    video_server = None
+    if file_dir:
+        video_dir = Path(file_dir)
+        video_dir.mkdir(exist_ok=True)
+        video_server = "http://localhost:9090/{file_dir}"
+    (video_dir / "videos").mkdir(exist_ok=True)
+    reaction_video_path = video_dir / reaction_video_file
+    screen_video_path = video_dir / screen_video_file
     convert(screen_path, screen_video_path)
     convert(webcam_path, reaction_video_path)
 
@@ -74,6 +83,7 @@ def load_url_and_save(url, id, override=True):
             if data["team"]["id"].startswith("46")
             else "videos/green_motion.mp4"
         ),
+        "videoServer": video_server,
     }
 
     with open(config_path, "w") as file:
@@ -88,6 +98,11 @@ if __name__ == "__main__":
         nargs="*",
         default=[],
         help="ID(s) of the submissions. If not specified, will load all submissions.",
+    )
+    parser.add_argument(
+        "-d",
+        "--file_dir",
+        help="Directory to save the files. If specified, then we assume that you will run a server from root with port 9090.",
     )
     parser.add_argument(
         "-o",
@@ -106,6 +121,7 @@ if __name__ == "__main__":
 
     url = args.url
     ids = args.id
+    file_dir = args.file_dir
     override = args.override
     processes = args.processes
 
@@ -114,5 +130,4 @@ if __name__ == "__main__":
         ids = [run["id"] for run in response.json() if run["isHidden"] == False]
 
     with multiprocessing.Pool(processes=processes) as pool:
-        inputs = [(url, id, override) for id in ids]
-        pool.starmap(load_url_and_save, [(url, id, override) for id in ids])
+        pool.starmap(load_url_and_save, [(url, id, file_dir, override) for id in ids])

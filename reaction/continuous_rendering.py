@@ -19,7 +19,9 @@ def render_video(config_directory, filename):
         "ReactionVideo",
         output_path,
         f"--props={props_path}",
+        "--enable-multi-process-on-linux",
         "--concurrency=1",
+        "--offthreadvideo-cache-size-in-bytes=3000000000",
     ]
     subprocess.run(render_command, stdout=subprocess.DEVNULL)
     processed_directory = config_directory / "processed"

@@ -1,6 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { Img, useVideoConfig, interpolate, useCurrentFrame, Easing } from 'remotion'
-import '@fontsource/urbanist/700.css';
 import { Lottie } from '@remotion/lottie';
 import loader from './data.json';
 

@@ -25,7 +25,7 @@ def convert(input_path, output_path):
     print(f"Conversion completed in {elapsed_time.total_seconds()} seconds.")
 
 
-def load_url_and_save(url, id, file_dir, override=True):
+def load_url_and_save(url, id, file_dir, destination, override=True):
     response = requests.get(f"{url}/api/overlay/externalRun/{id}")
     data = response.json()
     config_dir = Path(".") / "config"
@@ -89,6 +89,23 @@ def load_url_and_save(url, id, file_dir, override=True):
     with open(config_path, "w") as file:
         json.dump(response, file, indent=4)
 
+    if destination:
+
+        def rsync_file(path):
+            print(f"Rsyncing {path} to {destination / path}...")
+            rsync_command = [
+                "rsync",
+                "-av",
+                str(path),
+                str(destination / path),
+            ]
+
+            subprocess.run(rsync_command, stdout=subprocess.DEVNULL)
+
+        rsync_file(config_path)
+        rsync_file(screen_video_path)
+        rsync_file(reaction_video_path)
+
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Load data from URL and save")
@@ -117,6 +134,10 @@ if __name__ == "__main__":
         default=1,
         help="Number of processes to use for parallel execution",
     )
+    parser.add_argument(
+        "--destination",
+        help="Destination directory for rsync",
+    )
     args = parser.parse_args()
 
     url = args.url
@@ -124,10 +145,14 @@ if __name__ == "__main__":
     file_dir = args.file_dir
     override = args.override
     processes = args.processes
+    destination = args.destination
 
     if not ids:
         response = requests.get(f"{url}/api/overlay/runs")
         ids = [run["id"] for run in response.json() if run["isHidden"] == False]
 
     with multiprocessing.Pool(processes=processes) as pool:
-        pool.starmap(load_url_and_save, [(url, id, file_dir, override) for id in ids])
+        pool.starmap(
+            load_url_and_save,
+            [(url, id, file_dir, destination, override) for id in ids],
+        )

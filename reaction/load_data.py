@@ -102,10 +102,9 @@ def load_url_and_save(url, id, file_dir, destination, override=True):
 
             subprocess.run(rsync_command, stdout=subprocess.DEVNULL)
 
-        rsync_file(config_path)
         rsync_file(screen_video_path)
         rsync_file(reaction_video_path)
-
+        rsync_file(config_path)
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Load data from URL and save")

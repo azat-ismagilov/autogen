@@ -39,7 +39,7 @@ export const RemotionRoot: React.FC = () => {
 					success: true,
 					contestHeader: 'svg/header_46.svg',
 					audioPath: 'audio/success-sound-effect.wav',
-					backgroundVideoPath: 'videos/blue_motion.mp4',
+					backgroundVideoOrSvg: 'videos/blue_motion.mp4',
 					rankBefore: 10,
 					rankAfter: 1,
 				}}
@@ -74,7 +74,7 @@ export const RemotionRoot: React.FC = () => {
 					success: true,
 					contestHeader: 'svg/header_46.svg',
 					audioPath: 'audio/success-sound-effect.wav',
-					backgroundVideoPath: 'videos/blue_motion.mp4',
+					backgroundVideoOrSvg: 'videos/blue_motion.mp4',
 					rankBefore: 10,
 					rankAfter: 1,
 				}}

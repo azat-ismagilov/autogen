@@ -69,7 +69,7 @@ export const Reaction: React.FC<z.infer<typeof configSchema>> = ({
   audioPath,
   webcamVideoPath,
   screenVideoPath,
-  backgroundVideoPath,
+  backgroundVideoOrSvg,
   videoServer,
 }) => {
   const frame = useCurrentFrame();
@@ -113,7 +113,9 @@ export const Reaction: React.FC<z.infer<typeof configSchema>> = ({
   return (
     <div>
       <AbsoluteFill>
-        <Background backgroundVideoPath={backgroundVideoPath} />
+        {backgroundVideoOrSvg.endsWith('.svg') ?
+          <Img src={staticFile(backgroundVideoOrSvg)} /> :
+          <Background backgroundVideoPath={backgroundVideoOrSvg} />}
       </AbsoluteFill>
       <AbsoluteFill>
         {/* Show confetti only if success */}

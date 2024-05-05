@@ -78,7 +78,7 @@ def load_url_and_save(url, id, file_dir, override=True):
             if data["team"]["id"].startswith("46")
             else "svg/header_47.svg"
         ),
-        "backgroundVideoPath": (
+        "backgroundVideoOrSvg": (
             "videos/blue_motion.mp4"
             if data["team"]["id"].startswith("46")
             else "videos/green_motion.mp4"

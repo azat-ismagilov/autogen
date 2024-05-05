@@ -15,6 +15,6 @@ export const configSchema = z.object({
   audioPath: z.string(),
   screenVideoPath: z.string(),
   webcamVideoPath: z.string(),
-  backgroundVideoPath: z.string(),
+  backgroundVideoOrSvg: z.string(),
   videoServer: z.union([z.string(), z.undefined()]),
 });

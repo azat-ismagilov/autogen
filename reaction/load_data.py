@@ -74,9 +74,7 @@ def load_url_and_save(url, id, file_dir, destination, override=True):
         "webcamVideoPath": reaction_video_file,
         "screenVideoPath": screen_video_file,
         "contestHeader": (
-            "svg/header_46.svg"
-            if data["team"]["id"].startswith("46")
-            else "svg/header_47.svg"
+            "svg/header.svg"
         ),
         "backgroundVideoOrSvg": (
             "videos/blue_motion.mp4"

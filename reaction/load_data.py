@@ -92,8 +92,7 @@ def load_url_and_save(url, id, file_dir, destination, override=True):
         def rsync_file(path):
             print(f"Rsyncing {path} to {destination / path}...")
             rsync_command = [
-                "rsync",
-                "-av",
+                "scp",
                 str(path),
                 str(destination / path),
             ]

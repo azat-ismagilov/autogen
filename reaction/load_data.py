@@ -18,12 +18,32 @@ def convert(input_path, output_path):
     print(f"Converting {input_path} to {output_path}...")
     start_time = datetime.now()
     ffmpeg.input(str(input_path)).output(
-        str(output_path), threads=1, **{"c:a": "aac", "b:v": "2000k", "s": "1280x720"}
+        str(output_path), 
+        threads=1, 
+        **{"c:a": "aac", "b:v": "2000k", "s": "1280x720"}
     ).run(quiet=True)
     end_time = datetime.now()
     elapsed_time = end_time - start_time
     print(f"Conversion completed in {elapsed_time.total_seconds()} seconds.")
 
+def from_image(input_path, output_path):
+    fps = 30
+    duration = 300
+    if os.path.exists(output_path):
+        os.remove(output_path)
+    print(f"Converting {input_path} to {output_path}...")
+    start_time = datetime.now()
+    ffmpeg.input(str(input_path), loop=1, framerate=30).output(
+        str(output_path), 
+        threads=1, 
+        vcodec='libx264', 
+        pix_fmt='yuv420p', 
+        t=duration, 
+        r=fps
+    ).run(quiet=True)
+    end_time = datetime.now()
+    elapsed_time = end_time - start_time
+    print(f"Conversion completed in {elapsed_time.total_seconds()} seconds.")
 
 def load_url_and_save(url, id, file_dir, destination, override=True):
     response = requests.get(f"{url}/api/overlay/externalRun/{id}")
@@ -36,9 +56,6 @@ def load_url_and_save(url, id, file_dir, destination, override=True):
         print(f"Skipping {id} as config file already exists.")
         return
 
-    screen_path = data["reactionVideos"][1]["url"]
-    webcam_path = data["reactionVideos"][0]["url"]
-
     reaction_video_file = f"videos/reaction_{id}.mp4"
     screen_video_file = f"videos/screen_{id}.mp4"
     video_dir = Path(".") / "public"
@@ -50,8 +67,16 @@ def load_url_and_save(url, id, file_dir, destination, override=True):
     (video_dir / "videos").mkdir(exist_ok=True)
     reaction_video_path = video_dir / reaction_video_file
     screen_video_path = video_dir / screen_video_file
-    convert(screen_path, screen_video_path)
-    convert(webcam_path, reaction_video_path)
+    try:
+        webcam_path = data["reactionVideos"][0]["url"]
+        convert(webcam_path, reaction_video_path)
+    except:
+        return
+    try:
+        screen_path = data["reactionVideos"][1]["url"]
+        convert(screen_path, screen_video_path)
+    except: 
+        from_image(data["problem"]["letter"] + ".png", screen_video_path)
 
     is_success = data["result"]["verdict"]["isAccepted"]
 

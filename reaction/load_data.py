@@ -50,7 +50,7 @@ def from_image(input_path, output_path):
 def apply_cds_auth(url, cds_auth):
     if cds_auth is None:
         return url
-    return url.replace("http://", f"http://{cds_auth}:").replace("https://", f"https://{cds_auth}:")
+    return url.replace("http://", f"http://{cds_auth}@").replace("https://", f"https://{cds_auth}@")
 
 
 def load_url_and_save(url, id, file_dir, destination, override=True, cds_auth=None):

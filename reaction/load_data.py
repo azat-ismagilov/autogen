@@ -18,13 +18,14 @@ def convert(input_path, output_path):
     print(f"Converting {input_path} to {output_path}...")
     start_time = datetime.now()
     ffmpeg.input(str(input_path)).output(
-        str(output_path), 
-        threads=1, 
+        str(output_path),
+        threads=1,
         **{"c:a": "aac", "b:v": "2000k", "s": "1280x720"}
     ).run(quiet=True)
     end_time = datetime.now()
     elapsed_time = end_time - start_time
     print(f"Conversion completed in {elapsed_time.total_seconds()} seconds.")
+
 
 def from_image(input_path, output_path):
     fps = 30
@@ -34,18 +35,25 @@ def from_image(input_path, output_path):
     print(f"Converting {input_path} to {output_path}...")
     start_time = datetime.now()
     ffmpeg.input(str(input_path), loop=1, framerate=30).output(
-        str(output_path), 
-        threads=1, 
-        vcodec='libx264', 
-        pix_fmt='yuv420p', 
-        t=duration, 
+        str(output_path),
+        threads=1,
+        vcodec='libx264',
+        pix_fmt='yuv420p',
+        t=duration,
         r=fps
     ).run(quiet=True)
     end_time = datetime.now()
     elapsed_time = end_time - start_time
     print(f"Conversion completed in {elapsed_time.total_seconds()} seconds.")
 
-def load_url_and_save(url, id, file_dir, destination, override=True):
+
+def apply_cds_auth(url, cds_auth):
+    if cds_auth is None:
+        return url
+    return url.replace("http://", f"http://{cds_auth}:").replace("https://", f"https://{cds_auth}:")
+
+
+def load_url_and_save(url, id, file_dir, destination, override=True, cds_auth=None):
     response = requests.get(f"{url}/api/overlay/externalRun/{id}")
     data = response.json()
     config_dir = Path(".") / "config"
@@ -68,14 +76,14 @@ def load_url_and_save(url, id, file_dir, destination, override=True):
     reaction_video_path = video_dir / reaction_video_file
     screen_video_path = video_dir / screen_video_file
     try:
-        webcam_path = data["reactionVideos"][0]["url"]
+        webcam_path = apply_cds_auth(data["reactionVideos"][0]["url"], cds_auth)
         convert(webcam_path, reaction_video_path)
     except:
         return
     try:
-        screen_path = data["reactionVideos"][1]["url"]
+        screen_path = apply_cds_auth(data["reactionVideos"][1]["url"], cds_auth)
         convert(screen_path, screen_video_path)
-    except: 
+    except:
         from_image(data["problem"]["letter"] + ".png", screen_video_path)
 
     is_success = data["result"]["verdict"]["isAccepted"]
@@ -113,7 +121,6 @@ def load_url_and_save(url, id, file_dir, destination, override=True):
         json.dump(response, file, indent=4)
 
     if destination:
-
         def rsync_file(path):
             print(f"Rsyncing {path} to {destination / path}...")
             rsync_command = [
@@ -127,6 +134,7 @@ def load_url_and_save(url, id, file_dir, destination, override=True):
         rsync_file(screen_video_path)
         rsync_file(reaction_video_path)
         rsync_file(config_path)
+
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Load data from URL and save")
@@ -159,6 +167,11 @@ if __name__ == "__main__":
         "--destination",
         help="Destination directory for rsync",
     )
+    parser.add_argument(
+        "--cds_auth",
+        default=None,
+        help="Basic http auth that need to use for downloading reaction from cds in format login@password",
+    )
     args = parser.parse_args()
 
     url = args.url
@@ -167,6 +180,7 @@ if __name__ == "__main__":
     override = args.override
     processes = args.processes
     destination = args.destination
+    cds_auth = args.destination
 
     if not ids:
         response = requests.get(f"{url}/api/overlay/runs")
@@ -175,5 +189,5 @@ if __name__ == "__main__":
     with multiprocessing.Pool(processes=processes) as pool:
         pool.starmap(
             load_url_and_save,
-            [(url, id, file_dir, destination, override) for id in ids],
+            [(url, id, file_dir, destination, override, cds_auth) for id in ids],
         )

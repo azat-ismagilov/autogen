@@ -20,28 +20,7 @@ import { UserVideo } from './Reaction/UserVideo';
 import { COLOR_YELLOW, COLOR_GREEN, COLOR_RED } from './Reaction/constants';
 import { configSchema } from './types';
 import { Background } from './Background';
-
-function sequenceGenerator(firstValue: number, distance: number, delay: number, count: number): number[] {
-  let term = firstValue;
-  const sequence: number[] = [];
-  for (let i = 1; i <= count; i++) {
-    sequence.push(term);
-    term += distance;
-    sequence.push(term);
-    term += delay;
-  }
-  return sequence;
-};
-
-function repeatArray<T>(array: T[], times: number): T[] {
-  const repeatedArray: T[] = [];
-
-  for (let i = 0; i < times; i++) {
-    repeatedArray.push(...array);
-  }
-
-  return repeatedArray;
-}
+import { repeatArray, sequenceGenerator } from './helper';
 
 const confettiConfig: ConfettiConfig = {
   particleCount: 200,
@@ -134,7 +113,7 @@ export const Reaction: React.FC<z.infer<typeof configSchema>> = ({
           <div className="w-[1000px] inline-flex flex-col justify-center items-center" style={{ gap }}>
             <Img src={staticFile(contestHeader)} />
             <UserVideo path={webcamVideoPath} videoServer={videoServer} />
-            <div className="z-20 w-full" style={{ transform: `scale(${scale})` }}>
+            <div className="z-20 w-full h-72" style={{ transform: `scale(${scale})` }}>
               <Card title={title} subtitle={subtitle} hashtag={hashtag} logoPath={logoPath} task={task} color={color}
                 time={time} outcome={outcome} success={success} rankBefore={rankBefore} rankAfter={rankAfter} animationStart={animationStart} />
             </div>

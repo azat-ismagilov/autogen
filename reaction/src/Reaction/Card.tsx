@@ -1,7 +1,9 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React from 'react';
 import { Img, useVideoConfig, interpolate, useCurrentFrame, Easing } from 'remotion'
 import { Lottie } from '@remotion/lottie';
 import loader from './data.json';
+import { FitText } from './FitText';
+
 
 export const Card: React.FC<{
   title: string;
@@ -21,19 +23,8 @@ export const Card: React.FC<{
   const frame = useCurrentFrame();
   const { fps } = useVideoConfig();
 
-  const titleRef = useRef<HTMLDivElement>(null);
 
   const opacityOut = interpolate(frame, [animationStart - 10, animationStart + 5], [1, 0]);
-
-  const [titleHeight, setTitleHeight] = useState<number>(0);
-
-  useEffect(() => {
-    if (titleRef.current) {
-      setTitleHeight(titleRef.current.offsetHeight);
-    }
-  }, []);
-
-  const bigLetterSize = Math.max(Math.min(1000, titleHeight * 0.99), 100);
 
   // This should be time at animationStart
   // Realtime is the duration in milliseconds since the start of the video
@@ -86,26 +77,26 @@ export const Card: React.FC<{
   );
 
   return (
-    <div>
+    <div className="h-full w-full">
       <div className="bg-gray-800 rounded absolute top-[-48px] p-4" style={{ right: `${placePositionPercent}%` }}>
         <div className="text-[40px] leading-none">
           {place}{getOrdinal(place)}  place
         </div>
       </div>
-      <div className="w-full rounded pl-[40px] pr-[60px] overflow-hidden gap-[31px] items-stretch flex" style={{ background: color }}>
+      <div className="w-full h-full rounded pl-[40px] pr-[40px] overflow-hidden gap-[31px] flex justify-stretch" style={{ background: color }}>
         <Img className="self-center w-auto h-auto max-w-[150px] max-h-[150px]" src={logoPath} />
-        <div className="py-8 grow grid grid-cols-[430px_max-content] justify-between gap-y-5">
-          <div className="place-self-stretch">
-            <div ref={titleRef} className="font-bold text-[63px] leading-none uppercase break-words">{title}</div>
+        <div className="w-full h-full max-h-full py-8 grow grid grid-cols-[550px_max-content] justify-between gap-y-5">
+          <div className="place-self-stretch h-full w-full">
+            <FitText text={title} />
           </div>
-          <div className="place-self-center justify-self-center font-bold leading-none uppercase font-mono" style={{ fontSize: bigLetterSize }}>{task}</div>
-          <div className="text-[40px] leading-none break-words">
+          <div className="place-self-center justify-self-center font-bold leading-none uppercase font-mono text-[170px]">{task}</div>
+          <div className="text-[30px] leading-none break-words">
             {subtitle} {hashtag}
           </div>
-          <div className="justify-self-center justify-start items-start inline-flex gap-[15px] text-[40px] font-mono leading-none">
+          <div className="justify-self-center justify-start items-start inline-flex gap-[15px] text-[30px] font-mono leading-none">
             <div className="flex flex-col items-end justify-start">
               <div style={{ opacity: 1 - opacityOut }}>{outcome}</div>
-              <div className="mt-[-45px] h=[40px]" style={{ opacity: opacityOut }}>
+              <div className="mt-[-40px] h=[30px]" style={{ opacity: opacityOut }}>
                 <Lottie loop animationData={loader} />
               </div>
             </div>

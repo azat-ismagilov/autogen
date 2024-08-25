@@ -1,15 +1,13 @@
+import argparse
 import json
+import multiprocessing
 import os
 import subprocess
-import sys
+from datetime import datetime
 from pathlib import Path
-from datetime import datetime, timedelta
 
 import ffmpeg
 import requests
-import shutil
-import argparse
-import multiprocessing
 
 
 def convert(input_path, output_path):
@@ -78,12 +76,12 @@ def load_url_and_save(url, id, file_dir, destination, override=True, cds_auth=No
     try:
         webcam_path = apply_cds_auth(data["reactionVideos"][0]["url"], cds_auth)
         convert(webcam_path, reaction_video_path)
-    except:
+    except Exception:
         return
     try:
         screen_path = apply_cds_auth(data["reactionVideos"][1]["url"], cds_auth)
         convert(screen_path, screen_video_path)
-    except:
+    except Exception:
         from_image(data["problem"]["letter"] + ".png", screen_video_path)
 
     is_success = data["result"]["verdict"]["isAccepted"]
@@ -187,7 +185,7 @@ if __name__ == "__main__":
 
     if not ids:
         response = requests.get(f"{url}/api/overlay/runs")
-        ids = [run["id"] for run in response.json() if run["isHidden"] == False]
+        ids = [run["id"] for run in response.json() if run["isHidden"] is False]
 
     with multiprocessing.Pool(processes=processes) as pool:
         pool.starmap(

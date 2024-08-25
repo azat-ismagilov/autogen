@@ -1,5 +1,5 @@
 import { measureText } from "@remotion/layout-utils";
-import React, { useRef, useState, useEffect } from "react";
+import React, { useRef, useState, useEffect, useMemo } from "react";
 
 const fontFamily = "Helvetica";
 const fontWeight = 700;
@@ -18,16 +18,14 @@ export const FitText: React.FC<{ text: string }> = ({ text }) => {
         }
     }, []);
 
-    console.log(width, height);
-
     const sampleSize = 10;
 
-    const measure = measureText({
+    const measure = useMemo(() => measureText({
         fontFamily,
         text,
         fontSize: sampleSize,
         fontWeight
-    });
+    }), [text]);
 
     const measureWidth = measure.width * 1.1;
     const measureHeight = measure.height;

@@ -30,4 +30,5 @@ export const reactionCardOnlyScheme = z.object({
   success: z.boolean(),
   rankBefore: z.number(),
   rankAfter: z.number(),
+  durationInSeconds: z.number(),
 });

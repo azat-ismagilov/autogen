@@ -92,7 +92,7 @@ export const RemotionRoot: React.FC = () => {
 				durationInFrames={150}
 				fps={FPS}
 				width={1000}
-				height={400}
+				height={340}
 				// You can override these props for each render:
 				// https://www.remotion.dev/docs/parametrized-rendering
 				schema={reactionCardOnlyScheme}
@@ -107,6 +107,10 @@ export const RemotionRoot: React.FC = () => {
 					success: true,
 					rankBefore: 10,
 					rankAfter: 1,
+					durationInSeconds: 100,
+				}}
+				calculateMetadata={async ({ props }) => {
+					return { durationInFrames: Math.floor(props.durationInSeconds * FPS) }
 				}}
 			/>
 		</>

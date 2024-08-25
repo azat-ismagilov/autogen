@@ -22,6 +22,8 @@ export const ReactionCardOnly: React.FC<z.infer<typeof reactionCardOnlyScheme>> 
     success,
     rankBefore,
     rankAfter,
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    durationInSeconds,
 }) => {
     const frame = useCurrentFrame();
 
@@ -41,7 +43,7 @@ export const ReactionCardOnly: React.FC<z.infer<typeof reactionCardOnlyScheme>> 
     );
 
     return (
-        <div className="w-full h-full fixed top-20">
+        <div className="w-full h-full fixed top-12">
             <div className="w-full h-[288px] ">
                 <Card title={title} subtitle={subtitle} hashtag={hashtag} logoPath={logoPath} task={task} color={color}
                     time={time} outcome={outcome} success={success} rankBefore={rankBefore} rankAfter={rankAfter} animationStart={animationStart} />

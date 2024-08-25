@@ -18,9 +18,7 @@ def convert(input_path, output_path):
     print(f"Converting {input_path} to {output_path}...")
     start_time = datetime.now()
     ffmpeg.input(str(input_path)).output(
-        str(output_path),
-        threads=1,
-        **{"c:a": "aac", "b:v": "2000k", "s": "1280x720"}
+        str(output_path), threads=1, **{"c:a": "aac", "b:v": "2000k", "s": "1280x720"}
     ).run(quiet=True)
     end_time = datetime.now()
     elapsed_time = end_time - start_time
@@ -37,10 +35,10 @@ def from_image(input_path, output_path):
     ffmpeg.input(str(input_path), loop=1, framerate=30).output(
         str(output_path),
         threads=1,
-        vcodec='libx264',
-        pix_fmt='yuv420p',
+        vcodec="libx264",
+        pix_fmt="yuv420p",
         t=duration,
-        r=fps
+        r=fps,
     ).run(quiet=True)
     end_time = datetime.now()
     elapsed_time = end_time - start_time
@@ -50,7 +48,9 @@ def from_image(input_path, output_path):
 def apply_cds_auth(url, cds_auth):
     if cds_auth is None:
         return url
-    return url.replace("http://", f"http://{cds_auth}@").replace("https://", f"https://{cds_auth}@")
+    return url.replace("http://", f"http://{cds_auth}@").replace(
+        "https://", f"https://{cds_auth}@"
+    )
 
 
 def load_url_and_save(url, id, file_dir, destination, override=True, cds_auth=None):
@@ -88,6 +88,9 @@ def load_url_and_save(url, id, file_dir, destination, override=True, cds_auth=No
 
     is_success = data["result"]["verdict"]["isAccepted"]
 
+    reaction_video_duration = int(
+        ffmpeg.probe(str(reaction_video_path))["streams"][0]["duration"]
+    )
     response = {
         "title": data["team"]["displayName"],
         "subtitle": data["team"]["customFields"]["clicsTeamFullName"],
@@ -106,21 +109,21 @@ def load_url_and_save(url, id, file_dir, destination, override=True, cds_auth=No
         "time": data["time"],
         "webcamVideoPath": reaction_video_file,
         "screenVideoPath": screen_video_file,
-        "contestHeader": (
-            "svg/header.svg"
-        ),
+        "contestHeader": ("svg/header.svg"),
         "backgroundVideoOrSvg": (
             "videos/blue_motion.mp4"
             if data["team"]["id"].startswith("46")
             else "videos/green_motion.mp4"
         ),
         "videoServer": video_server,
+        "durationInSeconds": reaction_video_duration,
     }
 
     with open(config_path, "w") as file:
         json.dump(response, file, indent=4)
 
     if destination:
+
         def rsync_file(path):
             print(f"Rsyncing {path} to {destination / path}...")
             rsync_command = [

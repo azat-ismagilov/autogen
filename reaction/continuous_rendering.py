@@ -7,7 +7,7 @@ import multiprocessing
 import argparse
 
 
-def render_video(config_directory, filename):
+def render_video(config_directory: Path, filename: str) -> None:
     id = filename.removeprefix("config_").removesuffix(".json")
     print(f"Rendering {id}...")
     props_path = config_directory / filename
@@ -17,7 +17,7 @@ def render_video(config_directory, filename):
         "remotion",
         "render",
         "ReactionVideo",
-        output_path,
+        str(output_path),
         f"--props={props_path}",
         "--enable-multi-process-on-linux",
         "--concurrency=1",

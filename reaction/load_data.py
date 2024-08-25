@@ -10,7 +10,7 @@ import ffmpeg
 import requests
 
 
-def convert(input_path, output_path):
+def convert(input_path: str, output_path: Path) -> None:
     if os.path.exists(output_path):
         os.remove(output_path)
     print(f"Converting {input_path} to {output_path}...")
@@ -23,7 +23,7 @@ def convert(input_path, output_path):
     print(f"Conversion completed in {elapsed_time.total_seconds()} seconds.")
 
 
-def from_image(input_path, output_path):
+def from_image(input_path: str, output_path: Path) -> None:
     fps = 30
     duration = 300
     if os.path.exists(output_path):
@@ -43,7 +43,7 @@ def from_image(input_path, output_path):
     print(f"Conversion completed in {elapsed_time.total_seconds()} seconds.")
 
 
-def apply_cds_auth(url, cds_auth):
+def apply_cds_auth(url: str, cds_auth: str | None) -> str:
     if cds_auth is None:
         return url
     return url.replace("http://", f"http://{cds_auth}@").replace(
@@ -51,7 +51,14 @@ def apply_cds_auth(url, cds_auth):
     )
 
 
-def load_url_and_save(url, id, file_dir, destination, override=True, cds_auth=None):
+def load_url_and_save(
+    url: str,
+    id: str,
+    file_dir: str,
+    destination: Path,
+    override: bool = True,
+    cds_auth: str | None = None,
+) -> None:
     response = requests.get(f"{url}/api/overlay/externalRun/{id}")
     data = response.json()
     config_dir = Path(".") / "config"
@@ -122,7 +129,7 @@ def load_url_and_save(url, id, file_dir, destination, override=True, cds_auth=No
 
     if destination:
 
-        def rsync_file(path):
+        def rsync_file(path: Path) -> None:
             print(f"Rsyncing {path} to {destination / path}...")
             rsync_command = [
                 "scp",

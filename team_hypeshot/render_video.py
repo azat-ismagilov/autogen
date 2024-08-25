@@ -5,12 +5,12 @@ import logging
 import re
 import random
 import torch
-from typing import List
+from typing import List, Tuple
 from PIL import Image
-from iptcinfo3 import IPTCInfo
+from iptcinfo3 import IPTCInfo  # type: ignore
 import json
 import subprocess
-from carvekit.api.high import HiInterface
+from carvekit.api.high import HiInterface  # type: ignore
 from pathlib import Path
 
 # Disable IPTCInfo logger
@@ -18,18 +18,18 @@ iptcinfo_logger = logging.getLogger("iptcinfo")
 iptcinfo_logger.setLevel(logging.ERROR)
 
 
-def get_iptc_instance(path):
-    return IPTCInfo(path)
+def get_iptc_instance(path: str) -> IPTCInfo:
+    return IPTCInfo(path)  # type: ignore
 
 
-def try_decode(s):
+def try_decode(s: bytes) -> str:
     try:
         return s.decode()
     except Exception:
         return ""
 
 
-def find_photos_in_directory(dir) -> List:
+def find_photos_in_directory(dir: str) -> List[str]:
     result = []
     for path in glob.glob(os.path.join(dir, "**/*"), recursive=True):
         if not path.lower().endswith((".png", ".jpg", ".jpeg")):
@@ -38,12 +38,12 @@ def find_photos_in_directory(dir) -> List:
     return result
 
 
-def get_tags_from_photo(path) -> List[str]:
+def get_tags_from_photo(path: str) -> List[str]:
     info = get_iptc_instance(path)
     return [try_decode(s) for s in info["keywords"]]
 
 
-def rectangle_format(picasa_format):
+def rectangle_format(picasa_format: str) -> Tuple[float, float, float, float]:
     left, top, right, bottom = [
         int(picasa_format[i : i + 4], 16) / 65535
         for i in range(0, len(picasa_format), 4)
@@ -51,122 +51,127 @@ def rectangle_format(picasa_format):
     return left, top, right, bottom
 
 
-for image_path in sorted(find_photos_in_directory("team_pictures")):
-    print("Starting on", image_path)
-    tags = get_tags_from_photo(image_path)
+if __name__ == "__main__":
+    for image_path in sorted(find_photos_in_directory("team_pictures")):
+        print("Starting on", image_path)
+        tags = get_tags_from_photo(image_path)
 
-    names = []
-    rectangles = []
-    team_name = "Unknown team"
+        names: List[str] = []
+        rectangles: List[Tuple[float, float, float, float]] = []
+        team_name: str = "Unknown team"
 
-    # Extract team names and face rectangles from tags
-    for tag in tags:
-        if tag.startswith("team$"):
-            team_name = tag.removeprefix("team$")
-        match = re.match(r"(.*)\(([a-f0-9]{16})\)", tag)
-        if match:
-            name, picasa_format = match.groups()
+        # Extract team names and face rectangles from tags
+        for tag in tags:
+            if tag.startswith("team$"):
+                team_name = tag.removeprefix("team$")
+            match = re.match(r"(.*)\(([a-f0-9]{16})\)", tag)
+            if match:
+                name, picasa_format = match.groups()
 
-            if name == "":
-                name = str(random.randint(1, 10000))
-            names.append(name)
-            rectangles.append(rectangle_format(picasa_format))
+                if name == "":
+                    name = str(random.randint(1, 10000))
+                names.append(name)
+                rectangles.append(rectangle_format(picasa_format))
 
-    # Open team image
-    team_image = Image.open(image_path)
-    cropped = []
+        # Open team image
+        team_image: Image.Image = Image.open(image_path)
+        cropped: List[Image.Image] = []
 
-    # Crop faces from the team image
-    for name, rectangle in zip(names, rectangles):
-        left, top, right, bottom = rectangle
-        width, height = team_image.size
-        left *= width
-        top *= height
-        right *= width
-        bottom *= height
+        # Crop faces from the team image
+        for name, rectangle in zip(names, rectangles):
+            left, top, right, bottom = rectangle
+            width, height = team_image.size
+            left *= width
+            top *= height
+            right *= width
+            bottom *= height
 
-        face_width = right - left
-        face_height = round(face_width * 1.1568943765281174)
+            face_width = right - left
+            face_height = round(face_width * 1.1568943765281174)
 
-        crop_padding_width = round(face_width * 1.2)
+            crop_padding_width = round(face_width * 1.2)
 
-        cropped.append(
-            team_image.crop(
-                (
-                    left - crop_padding_width,
-                    top - face_height * 2,
-                    right + crop_padding_width,
-                    bottom + face_height * 3,
+            cropped.append(
+                team_image.crop(
+                    (
+                        left - crop_padding_width,
+                        top - face_height * 2,
+                        right + crop_padding_width,
+                        bottom + face_height * 3,
+                    )
                 )
             )
+
+        print("Background removal started")
+
+        # Initialize HiInterface for background removal
+        interface = HiInterface(
+            object_type="hairs-like",
+            batch_size_seg=5,
+            batch_size_matting=1,
+            device="cuda" if torch.cuda.is_available() else "cpu",
+            seg_mask_size=320,
+            matting_mask_size=2048,
+            trimap_prob_threshold=231,
+            trimap_dilation=30,
+            trimap_erosion_iters=10,
+            fp16=False,
         )
 
-    print("Background removal started")
+        # Remove background from team image and cropped faces
+        images_without_background = interface([team_image] + cropped)
 
-    # Initialize HiInterface for background removal
-    interface = HiInterface(
-        object_type="hairs-like",
-        batch_size_seg=5,
-        batch_size_matting=1,
-        device="cuda" if torch.cuda.is_available() else "cpu",
-        seg_mask_size=320,
-        matting_mask_size=2048,
-        trimap_prob_threshold=231,
-        trimap_dilation=30,
-        trimap_erosion_iters=10,
-        fp16=False,
-    )
+        print("Background removal finished")
 
-    # Remove background from team image and cropped faces
-    images_without_background = interface([team_image] + cropped)
+        paths: List[str] = []
 
-    print("Background removal finished")
+        # Save the images without background
+        for index, image in enumerate(images_without_background):
+            path = f"photos/{index}.png"
+            paths.append(path)
+            image.save(Path("video/public") / path)
 
-    paths = []
+        colors: List[str] = ["#1A63D8", "#95C0D4", "#DC8232", "#2C8170", "#8B3A3A"]
+        subtitles: List[str] = [
+            "cool person",
+            "very smart",
+            "young genius",
+            "fearless adventurer",
+            "master strategist",
+            "creative visionary",
+            "charismatic leader",
+            "unstoppable force",
+            "brilliant innovator",
+            "inspiring mentor",
+            "natural-born talent",
+            "exceptional problem solver",
+            "dynamic trailblazer",
+        ]
 
-    # Save the images without background
-    for index, image in enumerate(images_without_background):
-        path = f"photos/{index}.png"
-        paths.append(path)
-        image.save(Path("video/public") / path)
+        team = {
+            "title": team_name,
+            "subtitle": "#icpcwfdhaka",
+            "path": paths[0],
+        }
+        participants = []
+        for name, path in zip(names, paths[1:]):
+            participants.append(
+                {"title": name, "subtitle": random.choice(subtitles), "path": path}
+            )
+        data = {
+            "team": team,
+            "participants": participants[0:3],
+            "color": random.choice(colors),
+        }
 
-    colors = ["#1A63D8", "#95C0D4", "#DC8232", "#2C8170", "#8B3A3A"]
-    subtitles = [
-        "cool person",
-        "very smart",
-        "young genius",
-        "fearless adventurer",
-        "master strategist",
-        "creative visionary",
-        "charismatic leader",
-        "unstoppable force",
-        "brilliant innovator",
-        "inspiring mentor",
-        "natural-born talent",
-        "exceptional problem solver",
-        "dynamic trailblazer",
-    ]
+        with open("video/public/team.json", "w") as file:
+            json.dump(data, file)
 
-    team = {"title": team_name, "subtitle": "#icpcwfdhaka", "path": paths[0]}
-    participants = []
-    for name, path in zip(names, paths[1:]):
-        participants.append(
-            {"title": name, "subtitle": random.choice(subtitles), "path": path}
-        )
-    data = {
-        "team": team,
-        "participants": participants[0:3],
-        "color": random.choice(colors),
-    }
+        p = subprocess.Popen(["npm", "run", "build"], cwd="video", shell=True)
+        p.wait()
 
-    with open("video/public/team.json", "w") as file:
-        json.dump(data, file)
+        output_directory = Path("rendered_videos")
 
-    p = subprocess.Popen(["npm", "run", "build"], cwd="video", shell=True)
-    p.wait()
-
-    output_directory = Path("rendered_videos")
-
-    os.makedirs(output_directory, exist_ok=True)
-    output_video = Path(image_path).stem + ".mp4"
-    shutil.move(Path("video/out/video.mp4"), output_directory / output_video)
+        os.makedirs(output_directory, exist_ok=True)
+        output_video = Path(image_path).stem + ".mp4"
+        shutil.move(Path("video/out/video.mp4"), output_directory / output_video)

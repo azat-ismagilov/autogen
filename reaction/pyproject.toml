@@ -1,0 +1,15 @@
+[tool.poetry]
+name = "reaction"
+version = "0.1.0"
+description = "Reaction project"
+authors = ["Your Name <you@example.com>"]
+package-mode = false
+
+[tool.poetry.dependencies]
+python = "^3.8"
+requests = "*"
+ffmpeg-python = "*"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"

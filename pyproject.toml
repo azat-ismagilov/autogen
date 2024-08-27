@@ -1,0 +1,26 @@
+[tool.poetry]
+name = "autogen"
+version = "0.1.0"
+description = "Video generation project for team hypeshot and reaction videos using Tailwind CSS"
+authors = ["Your Name <you@example.com>"]
+
+[tool.poetry.dependencies]
+python = "^3.8"
+carvekit = "4.1.0"
+IPTCInfo3 = "2.1.4"
+Pillow = "*"
+torch = "1.11.0"
+requests = "*"
+ffmpeg-python = "*"
+ruff = "*"
+pyright = "*"
+
+[tool.poetry.dev-dependencies]
+pytest = "^6.2"
+
+[tool.poetry.group.dev.dependencies]
+pre-commit = "2.20.0"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"

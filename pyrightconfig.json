@@ -1,0 +1,20 @@
+{
+  "include": [
+    "."
+  ],
+  "exclude": [
+    "**/node_modules",
+    "**/__pycache__"
+  ],
+  "ignore": [],
+  "strict": [],
+  "reportMissingImports": true,
+  "reportMissingTypeStubs": false,
+  "pythonVersion": "3.10",
+  "pythonPlatform": "Linux",
+  "venvPath": "/home/ubuntu/.cache/pypoetry/virtualenvs",
+  "pythonPath": "/home/ubuntu/.cache/pypoetry/virtualenvs/autogen-nw5N_2_r-py3.10/bin/python",
+  "extraPaths": [
+    "/home/ubuntu/.cache/pypoetry/virtualenvs/autogen-nw5N_2_r-py3.10/lib/python3.10/site-packages"
+  ]
+}

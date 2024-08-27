@@ -1,0 +1,20 @@
+[tool.poetry]
+name = "reaction"
+version = "0.1.0"
+description = "Reaction video generation project"
+authors = ["Your Name <you@example.com>"]
+
+[tool.poetry.dependencies]
+python = "^3.8"
+requests = "*"
+ffmpeg-python = "*"
+
+[tool.poetry.dev-dependencies]
+ruff = "*"
+pyright = "*"
+pytest = "^6.2"
+pre-commit = "^2.20.0"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"

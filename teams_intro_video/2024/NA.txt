@@ -1,0 +1,20 @@
+-r 1 -c 1 -t 2
+2024/photos/Team-057.jpg
+2024/photos/Team-016.jpg
+2024/photos/Team-017.jpg
+2024/photos/Team-027.jpg
+2024/photos/Team-076.jpg
+2024/photos/Team-088.jpg
+2024/photos/Team-089.jpg
+2024/photos/Team-114.jpg
+2024/photos/Team-115.jpg
+2024/photos/Team-116.jpg
+2024/photos/Team-117.jpg
+2024/photos/Team-122.jpg
+2024/photos/Team-124.jpg
+2024/photos/Team-125.jpg
+2024/photos/Team-127.jpg
+2024/photos/Team-131.jpg
+2024/photos/Team-133.jpg
+2024/photos/Team-135.jpg
+2024/photos/Team-136.jpg

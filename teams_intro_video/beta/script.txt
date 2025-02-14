@@ -1,0 +1,5 @@
+-r 2 -c 2
+beta/photos/blue.png
+beta/photos/yellow.png
+beta/photos/red.png
+beta/photos/red.png

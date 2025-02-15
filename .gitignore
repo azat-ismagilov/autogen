@@ -2,6 +2,9 @@ node_modules
 dist
 .DS_Store
 .env
+.venv
+.ruff_cache
+venv
 
 # Ignore the output video from Git but not videos you import into src/.
 out

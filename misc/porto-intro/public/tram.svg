@@ -1,0 +1,481 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="_Слой_2" data-name="Слой 2" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 496.75 229.07">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #027f96;
+      }
+
+      .cls-1, .cls-2, .cls-3, .cls-4, .cls-5, .cls-6, .cls-7, .cls-8, .cls-9, .cls-10, .cls-11, .cls-12, .cls-13, .cls-14, .cls-15, .cls-16, .cls-17, .cls-18, .cls-19 {
+        stroke-width: 0px;
+      }
+
+      .cls-2 {
+        fill: #daeee2;
+      }
+
+      .cls-20 {
+        opacity: .5;
+      }
+
+      .cls-21 {
+        opacity: .9;
+      }
+
+      .cls-3 {
+        fill: #09212b;
+      }
+
+      .cls-4 {
+        fill: #fad481;
+      }
+
+      .cls-5 {
+        fill: #ee3e45;
+      }
+
+      .cls-6 {
+        fill: #f0bc1b;
+      }
+
+      .cls-22 {
+        opacity: .2;
+      }
+
+      .cls-23 {
+        opacity: .05;
+      }
+
+      .cls-7 {
+        fill: none;
+      }
+
+      .cls-8 {
+        fill: #07222d;
+      }
+
+      .cls-9 {
+        fill: #f3faf5;
+      }
+
+      .cls-10 {
+        fill: #e3f2e8;
+      }
+
+      .cls-24 {
+        opacity: .15;
+      }
+
+      .cls-11 {
+        fill: #232b2b;
+      }
+
+      .cls-25 {
+        opacity: .4;
+      }
+
+      .cls-12 {
+        fill: #003844;
+      }
+
+      .cls-13 {
+        fill: #fff;
+      }
+
+      .cls-26 {
+        opacity: .75;
+      }
+
+      .cls-27 {
+        opacity: .3;
+      }
+
+      .cls-14 {
+        fill: #a33d50;
+      }
+
+      .cls-28 {
+        opacity: .1;
+      }
+
+      .cls-15 {
+        fill: #efa728;
+      }
+
+      .cls-29 {
+        clip-path: url(#clippath);
+      }
+
+      .cls-16 {
+        fill: #527576;
+      }
+
+      .cls-17 {
+        fill: #002d3c;
+      }
+
+      .cls-30 {
+        opacity: .25;
+      }
+
+      .cls-18 {
+        fill: #9bb2a9;
+      }
+
+      .cls-19 {
+        fill: #cde8d8;
+      }
+    </style>
+    <clipPath id="clippath">
+      <rect class="cls-7" width="482.38" height="229.07"/>
+    </clipPath>
+  </defs>
+  <g id="Layer_1" data-name="Layer 1">
+    <g>
+      <g class="cls-29">
+        <g>
+          <g>
+            <g class="cls-22">
+              <circle class="cls-13" cx="353.02" cy="194.93" r="19.76"/>
+            </g>
+            <circle class="cls-3" cx="353.02" cy="194.93" r="25.15"/>
+            <g class="cls-22">
+              <circle class="cls-13" cx="353.02" cy="194.93" r="23.36"/>
+            </g>
+            <g class="cls-24">
+              <circle class="cls-11" cx="353.02" cy="194.93" r="22.46"/>
+            </g>
+            <g class="cls-22">
+              <circle class="cls-13" cx="353.02" cy="194.93" r="21.56"/>
+            </g>
+            <g class="cls-22">
+              <circle class="cls-13" cx="353.02" cy="194.93" r="18.86"/>
+            </g>
+            <g class="cls-22">
+              <circle class="cls-13" cx="353.02" cy="194.93" r="6.29"/>
+            </g>
+            <circle class="cls-12" cx="353.02" cy="194.93" r="20.66"/>
+          </g>
+          <g>
+            <g class="cls-22">
+              <circle class="cls-13" cx="175.16" cy="194.93" r="19.76"/>
+            </g>
+            <circle class="cls-3" cx="175.16" cy="194.93" r="25.15"/>
+            <g class="cls-22">
+              <circle class="cls-13" cx="175.16" cy="194.93" r="23.36"/>
+            </g>
+            <g class="cls-24">
+              <circle class="cls-11" cx="175.16" cy="194.93" r="22.46"/>
+            </g>
+            <g class="cls-22">
+              <circle class="cls-13" cx="175.16" cy="194.93" r="21.56"/>
+            </g>
+            <g class="cls-22">
+              <circle class="cls-13" cx="175.16" cy="194.93" r="18.86"/>
+            </g>
+            <g class="cls-22">
+              <circle class="cls-13" cx="175.16" cy="194.93" r="6.29"/>
+            </g>
+            <circle class="cls-12" cx="175.16" cy="194.93" r="20.66"/>
+          </g>
+          <path class="cls-6" d="m491.36,80.85v-1.8H35.03v1.8h25.15v52.1h-25.15v61.08h44.02v-113.19h26.95v113.19h314.4v-113.19h26.95v113.19h44.02v-61.08h-25.15v-52.1h25.15Zm-414.11,1.8v50.3h-13.47v-52.1h13.47v1.8Zm97.91,50.3h-31.44v-52.1h31.44v52.1Zm35.03,0h-31.44v-52.1h31.44v52.1Zm35.03,0h-31.44v-52.1h31.44v52.1Zm35.03,0h-31.44v-52.1h31.44v52.1Zm35.03,0h-31.44v-52.1h31.44v52.1Zm35.03,0h-31.44v-52.1h31.44v52.1Zm35.03,0h-31.44v-52.1h31.44v52.1Zm77.25,0h-13.47v-52.1h13.47v52.1Z"/>
+          <g>
+            <g class="cls-21">
+              <rect class="cls-8" x="420.39" y="80.85" width="26.95" height="113.19"/>
+            </g>
+            <rect class="cls-16" x="420.39" y="116.78" width="4.49" height="1.8"/>
+            <rect class="cls-16" x="420.39" y="154.51" width="4.49" height="1.8"/>
+            <g class="cls-25">
+              <polygon class="cls-11" points="424.89 154.51 423.09 154.51 420.39 154.51 420.39 155.41 420.39 156.3 423.09 156.3 423.09 155.41 424.89 155.41 424.89 154.51"/>
+            </g>
+            <g class="cls-25">
+              <polygon class="cls-11" points="424.89 118.58 423.09 118.58 420.39 118.58 420.39 117.68 420.39 116.78 423.09 116.78 423.09 117.68 424.89 117.68 424.89 118.58"/>
+            </g>
+            <rect class="cls-16" x="442.85" y="116.78" width="4.49" height="1.8"/>
+            <rect class="cls-16" x="442.85" y="154.51" width="4.49" height="1.8"/>
+            <rect class="cls-4" x="423.09" y="118.58" width="1.8" height="35.93"/>
+            <g class="cls-30">
+              <rect class="cls-11" x="423.09" y="118.58" width=".9" height="35.93"/>
+            </g>
+            <rect class="cls-4" x="442.85" y="118.58" width="1.8" height="35.93"/>
+            <g class="cls-30">
+              <rect class="cls-11" x="442.85" y="118.58" width=".9" height="35.93"/>
+            </g>
+            <g class="cls-25">
+              <polygon class="cls-11" points="445.55 154.51 445.55 154.51 442.85 154.51 442.85 155.41 442.85 156.3 443.75 156.3 443.75 155.41 445.55 155.41 445.55 154.51"/>
+            </g>
+            <g class="cls-25">
+              <polygon class="cls-11" points="444.65 118.58 445.55 118.58 442.85 118.58 442.85 117.68 442.85 116.78 445.55 116.78 445.55 117.68 444.65 117.68 444.65 118.58"/>
+            </g>
+          </g>
+          <rect class="cls-6" x="29.64" y="68.27" width="467.11" height="3.59"/>
+          <rect class="cls-6" x="32.34" y="71.86" width="461.72" height="3.59"/>
+          <g class="cls-28">
+            <rect class="cls-11" x="32.34" y="71.86" width="461.72" height=".9"/>
+          </g>
+          <rect class="cls-6" x="35.03" y="75.46" width="456.33" height="3.59"/>
+          <path class="cls-2" d="m491.36,80.85v-1.8H35.03v1.8h25.15v52.1h-25.15v3.59h44.02v-55.69h26.95v55.69h314.4v-55.69h26.95v55.69h44.02v-3.59h-25.15v-52.1h25.15Zm-414.11,1.8v50.3h-13.47v-52.1h13.47v1.8Zm97.91,50.3h-31.44v-52.1h31.44v52.1Zm35.03,0h-31.44v-52.1h31.44v52.1Zm35.03,0h-31.44v-52.1h31.44v52.1Zm35.03,0h-31.44v-52.1h31.44v52.1Zm35.03,0h-31.44v-52.1h31.44v52.1Zm35.03,0h-31.44v-52.1h31.44v52.1Zm35.03,0h-31.44v-52.1h31.44v52.1Zm77.25,0h-13.47v-52.1h13.47v52.1Z"/>
+          <g class="cls-28">
+            <rect class="cls-11" x="35.03" y="75.46" width="456.33" height=".9"/>
+          </g>
+          <rect class="cls-15" x="35.03" y="136.54" width="26.95" height="57.49"/>
+          <g class="cls-24">
+            <rect class="cls-11" x="35.03" y="136.54" width="456.33" height="2.69"/>
+          </g>
+          <rect class="cls-6" x="111.39" y="33.24" width="303.62" height="13.47"/>
+          <g>
+            <rect class="cls-3" x="57.49" y="194.03" width="411.41" height="7.19"/>
+            <rect class="cls-8" x="79.05" y="194.03" width="368.29" height="15.27"/>
+            <g>
+              <polygon class="cls-12" points="188.64 194.03 68.27 194.03 68.27 204.81 179.66 204.81 188.64 194.03"/>
+              <polygon class="cls-8" points="68.27 199.42 184.15 199.42 188.64 194.03 68.27 194.03 68.27 199.42"/>
+            </g>
+            <g>
+              <polygon class="cls-12" points="337.75 194.03 458.12 194.03 458.12 204.81 346.74 204.81 337.75 194.03"/>
+              <polygon class="cls-8" points="458.12 199.42 342.24 199.42 337.75 194.03 458.12 194.03 458.12 199.42"/>
+            </g>
+            <g>
+              <polygon class="cls-12" points="30.54 204.81 41.13 194.23 64.68 194.23 64.68 204.81 30.54 204.81"/>
+              <polygon class="cls-8" points="35.93 199.42 64.68 199.42 64.68 194.23 41.13 194.23 35.93 199.42"/>
+            </g>
+            <g>
+              <polygon class="cls-12" points="495.85 204.81 485.26 194.23 461.72 194.23 461.72 204.81 495.85 204.81"/>
+              <polygon class="cls-8" points="490.46 199.42 461.72 199.42 461.72 194.23 485.26 194.23 490.46 199.42"/>
+            </g>
+          </g>
+          <g class="cls-24">
+            <rect class="cls-11" x="111.39" y="33.24" width="303.62" height="3.59"/>
+          </g>
+          <path class="cls-12" d="m439.17,46.71H87.13c-44.02,0-50.42,21.56-50.42,21.56h452.87s-6.4-21.56-50.42-21.56Z"/>
+          <path class="cls-3" d="m38.55,64.68h449.2c-.19-.29-.39-.59-.62-.9H39.17c-.22.31-.43.61-.62.9Z"/>
+          <rect class="cls-2" x="61.98" y="186.85" width="17.07" height="7.19"/>
+          <polygon class="cls-18" points="35.03 79.05 35.03 80.85 60.18 80.85 60.18 132.95 35.03 132.95 35.03 136.54 61.98 136.54 61.98 79.05 35.03 79.05"/>
+          <rect class="cls-2" x="106" y="186.85" width="314.4" height="7.19"/>
+          <path class="cls-1" d="m412.31,26.05H114.08c-3.97,0-7.19,3.22-7.19,7.19h312.6c0-3.97-3.22-7.19-7.19-7.19Z"/>
+          <g class="cls-22">
+            <rect class="cls-13" x="464.41" y="79.05" width="26.95" height="114.98"/>
+          </g>
+          <g>
+            <g class="cls-23">
+              <rect class="cls-11" x="388.95" y="80.85" width="27.85" height="52.1"/>
+            </g>
+            <g class="cls-28">
+              <polygon class="cls-11" points="389.85 132.95 416.8 132.95 416.8 132.05 389.85 132.05 389.85 80.85 388.95 80.85 388.95 132.95 389.85 132.95"/>
+            </g>
+            <g class="cls-20">
+              <polygon class="cls-13" points="415.9 80.85 389.85 80.85 389.85 81.75 415.9 81.75 415.9 132.05 416.8 132.05 416.8 80.85 415.9 80.85"/>
+            </g>
+          </g>
+          <g>
+            <g class="cls-23">
+              <rect class="cls-11" x="109.59" y="80.85" width="30.54" height="52.1"/>
+            </g>
+            <g class="cls-28">
+              <polygon class="cls-11" points="110.49 132.95 140.13 132.95 140.13 132.05 110.49 132.05 110.49 80.85 109.59 80.85 109.59 132.95 110.49 132.95"/>
+            </g>
+            <g class="cls-20">
+              <polygon class="cls-13" points="139.23 80.85 110.49 80.85 110.49 81.75 139.23 81.75 139.23 132.05 140.13 132.05 140.13 80.85 139.23 80.85"/>
+            </g>
+          </g>
+          <rect class="cls-19" x="31.44" y="186.85" width="30.54" height="7.19"/>
+          <g class="cls-26">
+            <rect class="cls-17" x="35.03" y="80.85" width="25.15" height="52.1"/>
+            <rect class="cls-17" x="63.78" y="80.85" width="13.47" height="52.1"/>
+            <rect class="cls-17" x="143.72" y="80.85" width="31.44" height="52.1"/>
+            <rect class="cls-17" x="178.76" y="80.85" width="31.44" height="52.1"/>
+            <rect class="cls-17" x="213.79" y="80.85" width="31.44" height="52.1"/>
+            <rect class="cls-17" x="248.82" y="80.85" width="31.44" height="52.1"/>
+            <rect class="cls-17" x="283.86" y="80.85" width="31.44" height="52.1"/>
+            <rect class="cls-17" x="318.89" y="80.85" width="31.44" height="52.1"/>
+            <rect class="cls-17" x="353.92" y="80.85" width="31.44" height="52.1"/>
+            <rect class="cls-17" x="449.14" y="80.85" width="13.47" height="52.1"/>
+            <rect class="cls-17" x="466.21" y="80.85" width="25.15" height="52.1"/>
+          </g>
+          <rect class="cls-2" x="447.34" y="186.85" width="17.07" height="7.19" transform="translate(911.75 380.88) rotate(180)"/>
+          <rect class="cls-10" x="464.41" y="186.85" width="30.54" height="7.19" transform="translate(959.36 380.88) rotate(180)"/>
+          <rect class="cls-9" x="491.36" y="186.85" width="3.59" height="7.19" transform="translate(986.31 380.88) rotate(180)"/>
+          <g class="cls-24">
+            <rect class="cls-13" x="61.98" y="79.05" width="1.8" height="114.98"/>
+          </g>
+          <g class="cls-28">
+            <rect class="cls-11" x="60.18" y="79.05" width="1.8" height="114.98"/>
+          </g>
+          <g class="cls-28">
+            <rect class="cls-11" x="31.44" y="186.85" width="3.59" height="7.19"/>
+          </g>
+          <g class="cls-24">
+            <rect class="cls-13" x="464.41" y="79.05" width="1.8" height="114.98"/>
+          </g>
+          <g class="cls-28">
+            <rect class="cls-11" x="462.61" y="79.05" width="1.8" height="114.98"/>
+          </g>
+          <g>
+            <g class="cls-21">
+              <rect class="cls-8" x="79.05" y="80.85" width="26.95" height="113.19"/>
+            </g>
+            <rect class="cls-16" x="79.05" y="116.78" width="4.49" height="1.8"/>
+            <rect class="cls-16" x="79.05" y="154.51" width="4.49" height="1.8"/>
+            <g class="cls-25">
+              <polygon class="cls-11" points="83.54 154.51 81.74 154.51 79.05 154.51 79.05 155.41 79.05 156.3 81.74 156.3 81.74 155.41 83.54 155.41 83.54 154.51"/>
+            </g>
+            <g class="cls-25">
+              <polygon class="cls-11" points="83.54 118.58 81.74 118.58 79.05 118.58 79.05 117.68 79.05 116.78 81.74 116.78 81.74 117.68 83.54 117.68 83.54 118.58"/>
+            </g>
+            <rect class="cls-16" x="101.51" y="116.78" width="4.49" height="1.8"/>
+            <rect class="cls-16" x="101.51" y="154.51" width="4.49" height="1.8"/>
+            <rect class="cls-4" x="81.74" y="118.58" width="1.8" height="35.93"/>
+            <g class="cls-30">
+              <rect class="cls-11" x="81.74" y="118.58" width=".9" height="35.93"/>
+            </g>
+            <rect class="cls-4" x="101.51" y="118.58" width="1.8" height="35.93"/>
+            <g class="cls-30">
+              <rect class="cls-11" x="101.51" y="118.58" width=".9" height="35.93"/>
+            </g>
+            <g class="cls-25">
+              <polygon class="cls-11" points="104.2 154.51 104.2 154.51 101.51 154.51 101.51 155.41 101.51 156.3 102.4 156.3 102.4 155.41 104.2 155.41 104.2 154.51"/>
+            </g>
+            <g class="cls-25">
+              <polygon class="cls-11" points="103.3 118.58 104.2 118.58 101.51 118.58 101.51 117.68 101.51 116.78 104.2 116.78 104.2 117.68 103.3 117.68 103.3 118.58"/>
+            </g>
+          </g>
+          <rect class="cls-2" x="143.72" y="94.32" width="241.64" height="1.8"/>
+          <g class="cls-30">
+            <polygon class="cls-11" points="143.72 96.12 143.72 97.92 173.37 97.92 173.37 132.95 175.16 132.95 175.16 97.92 175.16 96.12 143.72 96.12"/>
+          </g>
+          <g class="cls-20">
+            <polygon class="cls-11" points="35.03 80.85 35.03 82.64 58.39 82.64 58.39 132.95 60.18 132.95 60.18 82.64 60.18 80.85 35.03 80.85"/>
+          </g>
+          <g class="cls-30">
+            <polygon class="cls-11" points="449.14 80.85 449.14 82.64 460.82 82.64 460.82 132.95 462.61 132.95 462.61 82.64 462.61 80.85 449.14 80.85"/>
+          </g>
+          <g class="cls-30">
+            <polygon class="cls-11" points="466.21 80.85 466.21 82.64 489.56 82.64 489.56 82.64 491.36 82.64 491.36 82.64 491.36 80.85 466.21 80.85"/>
+          </g>
+          <g class="cls-30">
+            <polygon class="cls-11" points="178.76 96.12 178.76 97.92 208.4 97.92 208.4 132.95 210.2 132.95 210.2 97.92 210.2 96.12 178.76 96.12"/>
+          </g>
+          <g class="cls-30">
+            <polygon class="cls-11" points="213.79 96.12 213.79 97.92 243.43 97.92 243.43 132.95 245.23 132.95 245.23 97.92 245.23 96.12 213.79 96.12"/>
+          </g>
+          <g class="cls-30">
+            <polygon class="cls-11" points="248.82 96.12 248.82 97.92 278.47 97.92 278.47 132.95 280.26 132.95 280.26 97.92 280.26 96.12 248.82 96.12"/>
+          </g>
+          <g class="cls-30">
+            <polygon class="cls-11" points="283.86 96.12 283.86 97.92 313.5 97.92 313.5 132.95 315.3 132.95 315.3 97.92 315.3 96.12 283.86 96.12"/>
+          </g>
+          <g class="cls-30">
+            <polygon class="cls-11" points="318.89 96.12 318.89 97.92 348.53 97.92 348.53 132.95 350.33 132.95 350.33 97.92 350.33 96.12 318.89 96.12"/>
+          </g>
+          <g class="cls-30">
+            <polygon class="cls-11" points="353.92 96.12 353.92 97.92 383.57 97.92 383.57 132.95 385.36 132.95 385.36 97.92 385.36 96.12 353.92 96.12"/>
+          </g>
+          <g>
+            <g class="cls-30">
+              <polygon class="cls-11" points="143.72 80.85 143.72 82.64 173.37 82.64 173.37 94.32 175.16 94.32 175.16 82.64 175.16 80.85 143.72 80.85"/>
+            </g>
+            <g class="cls-30">
+              <polygon class="cls-11" points="178.76 80.85 178.76 82.64 208.4 82.64 208.4 94.32 210.2 94.32 210.2 82.64 210.2 80.85 178.76 80.85"/>
+            </g>
+            <g class="cls-30">
+              <polygon class="cls-11" points="213.79 80.85 213.79 82.64 243.43 82.64 243.43 94.32 245.23 94.32 245.23 82.64 245.23 80.85 213.79 80.85"/>
+            </g>
+            <g class="cls-30">
+              <polygon class="cls-11" points="248.82 80.85 248.82 82.64 278.47 82.64 278.47 94.32 280.26 94.32 280.26 82.64 280.26 80.85 248.82 80.85"/>
+            </g>
+            <g class="cls-30">
+              <polygon class="cls-11" points="283.86 80.85 283.86 82.64 313.5 82.64 313.5 94.32 315.3 94.32 315.3 82.64 315.3 80.85 283.86 80.85"/>
+            </g>
+            <g class="cls-30">
+              <polygon class="cls-11" points="318.89 80.85 318.89 82.64 348.53 82.64 348.53 94.32 350.33 94.32 350.33 82.64 350.33 80.85 318.89 80.85"/>
+            </g>
+            <g class="cls-30">
+              <polygon class="cls-11" points="353.92 80.85 353.92 82.64 383.57 82.64 383.57 94.32 385.36 94.32 385.36 82.64 385.36 80.85 353.92 80.85"/>
+            </g>
+          </g>
+          <g class="cls-20">
+            <g class="cls-22">
+              <rect class="cls-13" x="211.99" y="136.54" width="1.8" height="50.3"/>
+            </g>
+            <g class="cls-24">
+              <rect class="cls-11" x="210.2" y="136.54" width="1.8" height="50.3"/>
+            </g>
+          </g>
+          <g class="cls-20">
+            <g class="cls-22">
+              <rect class="cls-13" x="141.93" y="136.54" width="1.8" height="50.3"/>
+            </g>
+            <g class="cls-24">
+              <rect class="cls-11" x="140.13" y="136.54" width="1.8" height="50.3"/>
+            </g>
+          </g>
+          <g class="cls-20">
+            <g class="cls-22">
+              <rect class="cls-13" x="317.09" y="136.54" width="1.8" height="50.3"/>
+            </g>
+            <g class="cls-24">
+              <rect class="cls-11" x="315.3" y="136.54" width="1.8" height="50.3"/>
+            </g>
+          </g>
+          <g class="cls-20">
+            <g class="cls-22">
+              <rect class="cls-13" x="387.16" y="136.54" width="1.8" height="50.3"/>
+            </g>
+            <g class="cls-24">
+              <rect class="cls-11" x="385.36" y="136.54" width="1.8" height="50.3"/>
+            </g>
+          </g>
+          <g>
+            <ellipse class="cls-8" cx="482.38" cy="149.12" rx="3.08" ry="7.19"/>
+            <path class="cls-14" d="m483.27,142.83c-1.49,0-2.69,2.82-2.69,6.29s1.21,6.29,2.69,6.29h1.8v-12.58h-1.8Z"/>
+            <ellipse class="cls-5" cx="485.07" cy="149.12" rx="2.69" ry="6.29"/>
+          </g>
+          <g>
+            <ellipse class="cls-8" cx="44.02" cy="149.12" rx="3.08" ry="7.19"/>
+            <path class="cls-14" d="m43.12,155.41c1.49,0,2.69-2.82,2.69-6.29s-1.21-6.29-2.69-6.29h-1.8v12.58h1.8Z"/>
+            <ellipse class="cls-5" cx="41.32" cy="149.12" rx="2.69" ry="6.29"/>
+          </g>
+        </g>
+      </g>
+      <g class="cls-20">
+        <g class="cls-30">
+          <polygon class="cls-11" points="213.79 96.12 213.79 97.92 243.43 97.92 243.43 132.95 245.23 132.95 245.23 97.92 245.23 96.12 213.79 96.12"/>
+        </g>
+        <g class="cls-30">
+          <polygon class="cls-11" points="248.82 96.12 248.82 97.92 278.47 97.92 278.47 132.95 280.26 132.95 280.26 97.92 280.26 96.12 248.82 96.12"/>
+        </g>
+        <g class="cls-30">
+          <polygon class="cls-11" points="318.89 96.12 318.89 97.92 348.53 97.92 348.53 132.95 350.33 132.95 350.33 97.92 350.33 96.12 318.89 96.12"/>
+        </g>
+        <g class="cls-30">
+          <polygon class="cls-11" points="353.92 96.12 353.92 97.92 383.57 97.92 383.57 132.95 385.36 132.95 385.36 97.92 385.36 96.12 353.92 96.12"/>
+        </g>
+        <g class="cls-30">
+          <polygon class="cls-11" points="248.82 80.85 248.82 82.64 278.47 82.64 278.47 94.32 280.26 94.32 280.26 82.64 280.26 80.85 248.82 80.85"/>
+        </g>
+        <g class="cls-30">
+          <polygon class="cls-11" points="283.86 80.85 283.86 82.64 313.5 82.64 313.5 94.32 315.3 94.32 315.3 82.64 315.3 80.85 283.86 80.85"/>
+        </g>
+        <g class="cls-30">
+          <polygon class="cls-11" points="318.89 80.85 318.89 82.64 348.53 82.64 348.53 94.32 350.33 94.32 350.33 82.64 350.33 80.85 318.89 80.85"/>
+        </g>
+        <g class="cls-30">
+          <polygon class="cls-11" points="353.92 80.85 353.92 82.64 383.57 82.64 383.57 94.32 385.36 94.32 385.36 82.64 385.36 80.85 353.92 80.85"/>
+        </g>
+      </g>
+      <g class="cls-27">
+        <g class="cls-20">
+          <rect class="cls-13" x="353.92" y="97.92" width="1.8" height="35.03"/>
+        </g>
+        <g class="cls-20">
+          <rect class="cls-13" x="318.89" y="97.92" width="1.8" height="35.03"/>
+        </g>
+        <g class="cls-20">
+          <rect class="cls-13" x="283.86" y="97.92" width="1.8" height="35.03"/>
+        </g>
+        <g class="cls-20">
+          <rect class="cls-13" x="248.82" y="97.92" width="1.8" height="35.03"/>
+        </g>
+      </g>
+    </g>
+  </g>
+</svg>
